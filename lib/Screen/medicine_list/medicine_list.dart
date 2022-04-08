@@ -1,6 +1,8 @@
+import 'package:appname/Models/Medicine_List_Model/Medicine_Model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../Service/Medicine_List_Service/medicine_list_service.dart';
 import '../../routing_constants.dart';
 
 class MedicineList extends StatefulWidget {
@@ -8,10 +10,27 @@ class MedicineList extends StatefulWidget {
 
   @override
   State<MedicineList> createState() => _MedicineListState();
+
+
 }
 
 class _MedicineListState extends State<MedicineList> {
+MedicineListService service = MedicineListService();
+List<Medicine> listOfMedicine = [];
+
   @override
+   void initState() {
+    super.initState();
+   getListMedicine();
+  }
+
+  void getListMedicine() async{
+      listOfMedicine = await service.getMedicineList();
+      print(listOfMedicine.length);
+  }
+
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
