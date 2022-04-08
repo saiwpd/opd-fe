@@ -6,7 +6,7 @@ class MedicineListService {
 
   Future<List<Medicine>> getMedicineList() async {
     var response = await http.get(
-      Uri.parse("http://192.168.1.154:3000/medicines"),
+      Uri.parse("http://localhost:3000/medicines"),
     );
     if (response.statusCode == 200) {
       var result = medicineFromJson(response.body);

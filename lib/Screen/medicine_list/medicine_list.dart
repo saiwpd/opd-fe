@@ -29,8 +29,6 @@ List<Medicine> listOfMedicine = [];
       print(listOfMedicine.length);
   }
 
-
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -78,31 +76,72 @@ List<Medicine> listOfMedicine = [];
             ),
           ),
         )),
-        Container(
-          height: 25,
-        ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Container(
-                  color: Color.fromARGB(255, 179, 149, 153),
-                  height: 300.0,
-                  alignment: Alignment.center,
-                  child: const Text('mock scrollview'),
-                ),
-                Container(
-                  color: Color.fromARGB(255, 199, 168, 143),
-                  height: 250.0,
-                  alignment: Alignment.center,
-                  child: const Text('mock scrollview'),
-                ),
-              ],
-            ),
-          ),
-        ),
+        Expanded(          
+            child: ListView.builder(
+            padding: const EdgeInsets.all(20.0),            
+            itemCount: listOfMedicine.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    margin: const EdgeInsets.all(3.0),      
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Color.fromARGB(255, 111, 54, 244),width: 1),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      ),
+                      height: 100,
+                      child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(color: Color.fromARGB(255, 111, 54, 244), width: 1),
+                                    //borderRadius: BorderRadius.all(Radius.circular(100.0)), color: Color(0xffE8DEF8),                                    
+                                    ),
+                                height: 40,                                
+                              ),
+                            ),
+                            Expanded(                              
+                              flex: 5,
+                              child: Text('${listOfMedicine[index].name}'),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Color.fromARGB(255, 111, 54, 244), width: 1),
+                                        borderRadius: BorderRadius.all(Radius.circular(100.0)), color: Color(0xffE8DEF8),),
+                                height: 40,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                  Container(// 20%
+                                    child: Text('+'),
+                                  ),
+                                  Container( // 60%
+                                    child: Text('2'),
+                                  ),
+                                  Container( // 60%
+                                    child: Text('-'),
+                                  ),
+                                ]),
+                              ),
+                            )
+                          ]
+
+                          // [
+                          //   Center(child: Text('${listOfMedicine[index].name}')),
+                          //   Container(
+                          //     decoration: BoxDecoration(
+                          //       border: Border.all(color: Color.fromARGB(255, 111, 54, 244),width: 1)
+                          //     )
+
+                          //   )
+
+                          // ],
+                          ));
+                })),
         Container(
           height: 40,
         ),
@@ -117,7 +156,7 @@ List<Medicine> listOfMedicine = [];
             onPressed: () {
               Navigator.pushNamed(context, medicine_order);
             },
-            child: const Text('MedicineList'),
+            child: const Text('ดูรายการที่สั่ง'),
           ),
         ),
         Container(

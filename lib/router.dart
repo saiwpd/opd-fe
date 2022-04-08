@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'Screen/medicine_list/medicine_list.dart';
 import 'Screen/medicine_order/medicine_order.dart';
 import 'Screen/medicine_plan/medicine_plan.dart';
-import 'Screen/service_invoice/service_invoice.dart';
-import 'Screen/service_list/service_list.dart';
-import 'Screen/service_receipt/service_receipt.dart';
+import 'Screen/fee_invoice/fee_invoice.dart';
+import 'Screen/fee_list/fee_list.dart';
+import 'Screen/fee_receipt/fee_receipt.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -23,19 +23,19 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           builder: (context) => MedicinePlan(
               //data: settings.arguments,
               ));
-    case service_list:
+    case fee_list:
       return MaterialPageRoute(
-          builder: (context) => ServiceList(
+          builder: (context) => FeeList(
               //data: settings.arguments,
               ));
-    case service_invioce:
+    case fee_invioce:
       return MaterialPageRoute(
-          builder: (context) => ServiceInvoice(
+          builder: (context) => FeeInvoice(
               //data: settings.arguments,
               ));
-    case service_reciept:
+    case fee_reciept:
       return MaterialPageRoute(
-          builder: (context) => ServiceReciept(
+          builder: (context) => FeeReciept(
               //data: settings.arguments,
               ));
     default:

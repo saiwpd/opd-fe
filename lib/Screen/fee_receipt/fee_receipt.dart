@@ -1,14 +1,14 @@
 import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
 
-class ServiceReciept extends StatefulWidget {
-  ServiceReciept({Key? key}) : super(key: key);
+class FeeReciept extends StatefulWidget {
+  FeeReciept({Key? key}) : super(key: key);
 
   @override
-  State<ServiceReciept> createState() => _ServiceRecieptState();
+  State<FeeReciept> createState() => _FeeRecieptState();
 }
 
-class _ServiceRecieptState extends State<ServiceReciept> {
+class _FeeRecieptState extends State<FeeReciept> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +18,7 @@ class _ServiceRecieptState extends State<ServiceReciept> {
         onPressed: () {
          
         },
-        child: const Text('ServiceReciept'),
+        child: const Text('FeeReciept'),
       ),
     );
   }
