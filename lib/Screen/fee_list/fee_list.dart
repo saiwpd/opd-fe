@@ -77,11 +77,11 @@ class _FeeListState extends State<FeeList> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text('${listOfFees[index].invoice?.status == "PAID" ? listOfFees[index].reciept?.refId : listOfFees[index].invoice?.refId}'),
+                                Text('${listOfFees[index].status == "PAID" ? listOfFees[index].refId : listOfFees[index].refId}'),
                                 Text(
-                                    '${listOfFees[index].invoice?.createdAt.toString()}'),
+                                    '${listOfFees[index].createdAt.toString()}'),
                                 Text(
-                                    'ค่าบริการ ${listOfFees[index].invoice?.amount} บาท'),
+                                    'ค่าบริการ ${listOfFees[index].amount} บาท'),
                               ],
                             )),
                         Expanded(
@@ -102,13 +102,13 @@ class _FeeListState extends State<FeeList> {
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(50)),
-                                            primary: listOfFees[index].invoice?.status == "PAID" ? Colors.blue : Colors.green,
+                                            primary: listOfFees[index].status == "PAID" ? Colors.blue : Colors.green,
                                             textStyle:
                                                 const TextStyle(fontSize: 14)),
                                         onPressed: () {
                                           null;
                                         },
-                                        child: Text('${listOfFees[index].invoice?.status == "PAID" ? "VIEW" : "PAY"}'),
+                                        child: Text('${listOfFees[index].status == "PAID" ? "VIEW" : "PAY"}'),
                                       ),
                                     ),
                                     //child: Text('${listOfFees[index].invoice?.status == "PAID" ? "ชำระเงินแล้ว" : "ชำระเงิน"}'),
