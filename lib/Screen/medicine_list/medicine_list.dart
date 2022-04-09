@@ -2,7 +2,9 @@ import 'package:appname/Models/Medicine_List_Model/Medicine_Model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../Bloc/Medicine_List_Bloc/medicine_list_bloc.dart';
 import '../../Service/Medicine_List_Service/medicine_list_service.dart';
+import '../../SharedWidget/app_loading.dart';
 import '../../routing_constants.dart';
 
 class MedicineList extends StatefulWidget {
@@ -10,23 +12,15 @@ class MedicineList extends StatefulWidget {
 
   @override
   State<MedicineList> createState() => _MedicineListState();
-
-
 }
 
 class _MedicineListState extends State<MedicineList> {
-MedicineListService service = MedicineListService();
-List<Medicine> listOfMedicine = [];
+  MedicineListBloc bloc = MedicineListBloc();
 
   @override
-   void initState() {
+  void initState() {
     super.initState();
-   getListMedicine();
-  }
-
-  void getListMedicine() async{
-      listOfMedicine = await service.getMedicineList();
-      print(listOfMedicine.length);
+    bloc.initPage();
   }
 
   Widget build(BuildContext context) {
@@ -45,103 +39,172 @@ List<Medicine> listOfMedicine = [];
         Container(
           height: 30,
         ),
-        Center(
-            child: Container(
-          alignment: Alignment.center,
-          width: 350,
-          height: 50,
-          child: TextField(
-            textAlignVertical: TextAlignVertical.bottom,
-            textAlign: TextAlign.left,
-            decoration: new InputDecoration(
-              focusedBorder: const OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Colors.transparent, width: 0.0),
-                  borderRadius: BorderRadius.all(Radius.circular(50))),
-              enabledBorder: const OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Colors.transparent, width: 0.0),
-                  borderRadius: BorderRadius.all(Radius.circular(50))),
-              fillColor: Color(0xffE8DEF8),
-              filled: true,
-              suffixIcon: Icon(
-                Icons.search,
-                color: Color(0xFF65676B),
-              ),
-              hintText: 'ค้นหา...',
-              hintStyle: TextStyle(
-                  fontWeight: FontWeight.w300,
-                  color: Color(0xFF65676B),
-                  fontSize: 16),
-            ),
-          ),
-        )),
-        Expanded(          
-            child: ListView.builder(
-            padding: const EdgeInsets.all(20.0),            
-            itemCount: listOfMedicine.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    margin: const EdgeInsets.all(3.0),      
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Color.fromARGB(255, 111, 54, 244),width: 1),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      ),
-                      height: 100,
-                      child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              flex: 2,
-                              child: Container(
+        // Center(
+        //     child: Container(
+        //   alignment: Alignment.center,
+        //   width: 350,
+        //   height: 50,
+        //   child: TextField(
+        //     textAlignVertical: TextAlignVertical.bottom,
+        //     textAlign: TextAlign.left,
+        //     decoration: new InputDecoration(
+        //       focusedBorder: const OutlineInputBorder(
+        //           borderSide:
+        //               const BorderSide(color: Colors.transparent, width: 0.0),
+        //           borderRadius: BorderRadius.all(Radius.circular(50))),
+        //       enabledBorder: const OutlineInputBorder(
+        //           borderSide:
+        //               const BorderSide(color: Colors.transparent, width: 0.0),
+        //           borderRadius: BorderRadius.all(Radius.circular(50))),
+        //       fillColor: Color(0xffE8DEF8),
+        //       filled: true,
+        //       suffixIcon: Icon(
+        //         Icons.search,
+        //         color: Color(0xFF65676B),
+        //       ),
+        //       hintText: 'ค้นหา...',
+        //       hintStyle: TextStyle(
+        //           fontWeight: FontWeight.w300,
+        //           color: Color(0xFF65676B),
+        //           fontSize: 16),
+        //     ),
+        //   ),
+        // )),
+        StreamBuilder(
+            stream: bloc.getDataController.stream,
+            builder: (context, AsyncSnapshot<bool> snapshot) {
+              if (snapshot.hasData) {
+                if (!snapshot.hasError) {
+                  return Expanded(
+                      child: ListView.builder(
+                          padding: const EdgeInsets.all(20.0),
+                          itemCount: bloc.listOfMedicine.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                                margin: const EdgeInsets.all(3.0),
                                 decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(color: Color.fromARGB(255, 111, 54, 244), width: 1),
-                                    //borderRadius: BorderRadius.all(Radius.circular(100.0)), color: Color(0xffE8DEF8),                                    
+                                  border: Border.all(
+                                      color: Color.fromARGB(255, 111, 54, 244),
+                                      width: 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                ),
+                                height: 100,
+                                child: Row(children: <Widget>[
+                                  Expanded(
+                                    flex: 2,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: Color.fromARGB(
+                                                255, 111, 54, 244),
+                                            width: 1),
+                                        //borderRadius: BorderRadius.all(Radius.circular(100.0)), color: Color(0xffE8DEF8),
+                                      ),
+                                      height: 40,
                                     ),
-                                height: 40,                                
-                              ),
-                            ),
-                            Expanded(                              
-                              flex: 5,
-                              child: Text('${listOfMedicine[index].name}'),
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Color.fromARGB(255, 111, 54, 244), width: 1),
-                                        borderRadius: BorderRadius.all(Radius.circular(100.0)), color: Color(0xffE8DEF8),),
-                                height: 40,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                  Container(// 20%
-                                    child: Text('+'),
                                   ),
-                                  Container( // 60%
-                                    child: Text('2'),
+                                  Expanded(
+                                    flex: 5,
+                                    child: Text(
+                                        '${bloc.listOfMedicine[index].name}'),
                                   ),
-                                  Container( // 60%
-                                    child: Text('-'),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Color.fromARGB(
+                                                255, 111, 54, 244),
+                                            width: 1),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(100.0)),
+                                        color: Color(0xff6750A4),
+                                      ),
+                                      height: 40,
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: <Widget>[
+                                            InkWell(
+                                              onTap: () {
+                                                print("-");
+                                                bloc.decreseMedicine(
+                                                    bloc.listOfMedicine[index]);
+                                              },
+                                              child: SizedBox(
+                                                child: Container(
+                                                  child: Text(
+                                                    '-',
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                border: Border.all(
+                                                    color: Color.fromARGB(
+                                                        255, 111, 54, 244),
+                                                    width: 1),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5.0)),
+                                              ),
+                                              // 60%
+                                              width: 20,
+                                              height: 30,
+
+                                              child: Text(
+                                                  bloc.medicinePlan
+                                                          .draftMedicinePlans!
+                                                          .where((x) =>
+                                                              x.id ==
+                                                              bloc
+                                                                  .listOfMedicine[
+                                                                      index]
+                                                                  .id)
+                                                          .isNotEmpty
+                                                      ? '${bloc.medicinePlan.draftMedicinePlans!.firstWhere((x) => x.id == bloc.listOfMedicine[index].id).amount}'
+                                                      : "0",
+                                                  textAlign: TextAlign.center),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                print("+");
+                                                bloc.increseMedicine(
+                                                    bloc.listOfMedicine[index]);
+                                              },
+                                              child: SizedBox(
+                                                child: Container(
+                                                  child: Text(
+                                                    '+',
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ]),
+                                    ),
                                   ),
-                                ]),
-                              ),
-                            )
-                          ]
-
-                          // [
-                          //   Center(child: Text('${listOfMedicine[index].name}')),
-                          //   Container(
-                          //     decoration: BoxDecoration(
-                          //       border: Border.all(color: Color.fromARGB(255, 111, 54, 244),width: 1)
-                          //     )
-
-                          //   )
-
-                          // ],
-                          ));
-                })),
+                                  Container(
+                                    width: 20,
+                                  )
+                                ]));
+                          }));
+                } else {
+                  return AppLoaderIndicator();
+                }
+              } else {
+                return AppLoaderIndicator();
+              }
+            }),
         Container(
           height: 40,
         ),
@@ -154,7 +217,8 @@ List<Medicine> listOfMedicine = [];
                 primary: Colors.green,
                 textStyle: const TextStyle(fontSize: 20)),
             onPressed: () {
-              Navigator.pushNamed(context, medicine_order);
+              Navigator.pushNamed(context, medicine_order,
+                  arguments: bloc.medicinePlan);
             },
             child: const Text('ดูรายการที่สั่ง'),
           ),

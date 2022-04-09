@@ -1,11 +1,12 @@
 import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
 
-class MedicinePlan extends StatefulWidget {
-  MedicinePlan({Key? key}) : super(key: key);
-  
+import '../../Models/Medicine_Plan_Model/medicine_plan_model.dart';
 
-  
+class MedicinePlan extends StatefulWidget {
+  MedicinePlan({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<MedicinePlan> createState() => _MedicinePlanState();
@@ -34,7 +35,7 @@ class _MedicinePlanState extends State<MedicinePlan> {
           height: 20,
         ),
         Container(
-          margin: const EdgeInsets.only(right: 20, left: 20, bottom: 0, top: 0),          
+          margin: const EdgeInsets.only(right: 20, left: 20, bottom: 0, top: 0),
           height: 100,
           width: MediaQuery.of(context).size.width * 1,
           child: Column(
@@ -53,7 +54,7 @@ class _MedicinePlanState extends State<MedicinePlan> {
           ),
         ),
         Container(
-          margin: const EdgeInsets.only(right: 20, left: 20, bottom: 0, top: 0),          
+          margin: const EdgeInsets.only(right: 20, left: 20, bottom: 0, top: 0),
           height: 100,
           width: MediaQuery.of(context).size.width * 1,
           child: Column(
@@ -93,7 +94,8 @@ class _MedicinePlanState extends State<MedicinePlan> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(right: 20, left: 5, bottom: 0, top: 0),
+              margin:
+                  const EdgeInsets.only(right: 20, left: 5, bottom: 0, top: 0),
               height: 100,
               width: MediaQuery.of(context).size.width * 0.32,
               child: Column(
@@ -113,7 +115,8 @@ class _MedicinePlanState extends State<MedicinePlan> {
           ],
         ),
         Container(
-          margin: const EdgeInsets.only(right: 20, left: 20, bottom: 20, top: 0),
+          margin:
+              const EdgeInsets.only(right: 20, left: 20, bottom: 20, top: 0),
           height: 250,
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -197,8 +200,6 @@ class _MedicinePlanState extends State<MedicinePlan> {
             ],
           ),
         ),
-        
-       
         Container(
           height: 100,
         ),

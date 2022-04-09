@@ -1,5 +1,6 @@
 import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
+import 'Models/Medicine_Plan_Model/medicine_plan_model.dart';
 import 'Screen/medicine_list/medicine_list.dart';
 import 'Screen/medicine_order/medicine_order.dart';
 import 'Screen/medicine_plan/medicine_plan.dart';
@@ -16,13 +17,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case medicine_order:
       return MaterialPageRoute(
           builder: (context) => MedicineOrder(
-              //data: settings.arguments,
+                data: settings.arguments as MedicineOrderModel,
               ));
     case medicine_plan:
-      return MaterialPageRoute(
-          builder: (context) => MedicinePlan(
-              //data: settings.arguments,
-              ));
+      return MaterialPageRoute(builder: (context) => MedicinePlan());
     case fee_list:
       return MaterialPageRoute(
           builder: (context) => FeeList(
