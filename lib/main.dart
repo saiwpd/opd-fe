@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
      
       title: 'OPD',
       onGenerateRoute: generateRoute,
-      initialRoute: medicine_plan,
+      initialRoute: medicine_order,
     );
   }
 }

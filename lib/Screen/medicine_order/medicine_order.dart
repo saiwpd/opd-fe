@@ -25,8 +25,7 @@ class _MedicineOrderState extends State<MedicineOrder> {
     listOfMedicine = await service.getMedicineList();
     print(listOfMedicine.length);
   }
-  
-  
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -74,56 +73,52 @@ class _MedicineOrderState extends State<MedicineOrder> {
             ),
           ),
         )),
-        Container(
-          child:  Column(
-          children: <Widget>[
-            SizedBox(height:20.0),
-            ExpansionTile(
-              title: Text(
-                "Title",
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold
-                ),
-              ),
-              children: <Widget>[
-                ListTile(
-                  title: Text(
-                    'data'
-                  ),
-                )
-              ],
-            ),
-          ]),
-
-        ),
-        
-        Expanded(          
+        // Container(
+        //   child: Column(children: <Widget>[
+        //     SizedBox(height: 20.0),
+        //     ExpansionTile(
+        //       title: Text(
+        //         "Title",
+        //         style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+        //       ),
+        //       children: <Widget>[
+        //         ListTile(
+        //           title: Text('data'),
+        //         )
+        //       ],
+        //     ),
+        //   ]),
+        // ),
+        Expanded(
             child: ListView.builder(
-            padding: const EdgeInsets.all(20.0),            
-            itemCount: listOfMedicine.length,
+                padding: const EdgeInsets.all(20.0),
+                itemCount: listOfMedicine.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
-                    margin: const EdgeInsets.all(3.0),      
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Color.fromARGB(255, 111, 54, 244),width: 1),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      margin: const EdgeInsets.all(3.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Color.fromARGB(255, 111, 54, 244), width: 1),
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
-                      height: 80,
-                      child: Row(
+                      height: 200,
+                      child: Column(children: <Widget>[
+                        Row(
                           children: <Widget>[
                             Expanded(
                               flex: 2,
                               child: Container(
                                 decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(color: Color.fromARGB(255, 111, 54, 244), width: 1),
-                                    //borderRadius: BorderRadius.all(Radius.circular(100.0)), color: Color(0xffE8DEF8),                                    
-                                    ),
-                                height: 40,                                
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      color: Color.fromARGB(255, 111, 54, 244),
+                                      width: 1),
+                                  //borderRadius: BorderRadius.all(Radius.circular(100.0)), color: Color(0xffE8DEF8),
+                                ),
+                                height: 40,
                               ),
                             ),
-                            Expanded(                              
+                            Expanded(
                               flex: 5,
                               child: Text('${listOfMedicine[index].name}'),
                             ),
@@ -131,38 +126,70 @@ class _MedicineOrderState extends State<MedicineOrder> {
                               flex: 3,
                               child: Container(
                                 decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Color.fromARGB(255, 111, 54, 244), width: 1),
-                                        borderRadius: BorderRadius.all(Radius.circular(100.0)), color: Color(0xffE8DEF8),),
+                                  border: Border.all(
+                                      color: Color.fromARGB(255, 111, 54, 244),
+                                      width: 1),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(100.0)),
+                                  color: Color(0xffE8DEF8),
+                                ),
                                 height: 40,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                  Container(// 20%
-                                    child: Text('+'),
-                                  ),
-                                  Container( // 60%
-                                    child: Text('2'),
-                                  ),
-                                  Container( // 60%
-                                    child: Text('-'),
-                                  ),
-                                ]),
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      Container(
+                                        // 20%
+                                        child: Text('+'),
+                                      ),
+                                      Container(
+                                        // 60%
+                                        child: Text('2'),
+                                      ),
+                                      Container(
+                                        // 60%
+                                        child: Text('-'),
+                                      ),
+                                    ]),
                               ),
                             )
-                          ]
+                          ],
+                        ),
+                        Divider(
+                          indent: 20,
+                          endIndent: 20,
+                          color: Colors.black,
+                        ),
+                        Column(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 1,
+                              child: Text('สรรพคุณ : ${listOfMedicine[index].name}', textAlign: TextAlign.left,)
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 1,
+                              child: Text('จำนวน : ${listOfMedicine[index].name} หน่วย', textAlign: TextAlign.left,)
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 1,
+                              child: Text('ครั้งละ : ${listOfMedicine[index].name} เม็ด} ', textAlign: TextAlign.left,)
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 1,
+                              child: Text('ช่วง : เช้า, กลางวัน', textAlign: TextAlign.left,)
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 1,
+                              child: Text('มื้อ : ก่อน, หลัง', textAlign: TextAlign.left,)
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 1,
+                              child: Text('Date : 16 พย 2564', textAlign: TextAlign.left,)
+                            ),
+                          ],
 
-                          // [
-                          //   Center(child: Text('${listOfMedicine[index].name}')),
-                          //   Container(
-                          //     decoration: BoxDecoration(
-                          //       border: Border.all(color: Color.fromARGB(255, 111, 54, 244),width: 1)
-                          //     )
-
-                          //   )
-
-                          // ],
-                          ));
+                        )
+                      ]));
                 })),
         Container(
           height: 40,
