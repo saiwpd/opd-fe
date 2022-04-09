@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final fee = feeFromJson(jsonString);
+
 import 'dart:convert';
 
 List<Fee> feeFromJson(String str) => List<Fee>.from(json.decode(str).map((x) => Fee.fromJson(x)));
@@ -6,65 +10,41 @@ String feeToJson(List<Fee> data) => json.encode(List<dynamic>.from(data.map((x) 
 
 class Fee {
     Fee({
-        this.invoice,
-        this.reciept,
-    });
-
-    Invoice? invoice;
-    Reciept? reciept;
-
-    factory Fee.fromJson(Map<String, dynamic> json) => Fee(
-        invoice: json["invoice"] == null ? null : Invoice.fromJson(json["invoice"]),
-        reciept: json["reciept"] == null ? null : Reciept.fromJson(json["reciept"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "invoice": invoice?.toJson(),
-        "reciept": reciept == null ? null : reciept?.toJson(),
-    };
-}
-
-class Invoice {
-    Invoice({
-        this.id,
         this.refId,
         this.amount,
         this.status,
         this.summary,
-        this.userId,
         this.createdAt,
         this.updatedAt,
+        this.bank,
     });
 
-    String? id;
     String? refId;
     int? amount;
     String? status;
     Summary? summary;
-    String? userId;
     DateTime? createdAt;
     DateTime? updatedAt;
+    String? bank;
 
-    factory Invoice.fromJson(Map<String, dynamic> json) => Invoice(
-        id: json["_id"],
+    factory Fee.fromJson(Map<String, dynamic> json) => Fee(
         refId: json["refId"],
         amount: json["amount"],
         status: json["status"],
         summary: Summary.fromJson(json["summary"]),
-        userId: json["userId"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
+        bank: json["bank"] == null ? null : json["bank"],
     );
 
     Map<String, dynamic> toJson() => {
-        "_id": id,
         "refId": refId,
         "amount": amount,
         "status": status,
         "summary": summary?.toJson(),
-        "userId": userId,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
+        "bank": bank == null ? null : bank,
     };
 }
 
@@ -109,41 +89,5 @@ class MedicineFee {
         "medicineName": medicineName,
         "amount": amount,
         "totalPrice": totalPrice,
-    };
-}
-
-class Reciept {
-    Reciept({
-        this.id,
-        this.refId,
-        this.bank,
-        this.invoiceId,
-        this.createdAt,
-        this.updatedAt,
-    });
-
-    String? id;
-    String? refId;
-    String? bank;
-    String? invoiceId;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-
-    factory Reciept.fromJson(Map<String, dynamic> json) => Reciept(
-        id: json["_id"],
-        refId: json["refId"],
-        bank: json["bank"],
-        invoiceId: json["invoiceId"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "_id": id,
-        "refId": refId,
-        "bank": bank,
-        "invoiceId": invoiceId,
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
     };
 }
