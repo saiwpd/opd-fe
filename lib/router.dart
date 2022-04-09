@@ -1,3 +1,4 @@
+import 'package:appname/Models/Fee_List_Model/Fee_Model.dart';
 import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
 import 'Models/Medicine_Plan_Model/medicine_plan_model.dart';
@@ -29,7 +30,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case fee_invioce:
       return MaterialPageRoute(
           builder: (context) => FeeInvoice(
-              //data: settings.arguments,
+                data: settings.arguments as Fee,
               ));
     case fee_reciept:
       return MaterialPageRoute(
