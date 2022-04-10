@@ -1,3 +1,4 @@
+import 'package:appname/Models/Prescription_Model/Prescription_Model.dart';
 import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ import '../../Service/Medicine_List_Service/medicine_list_service.dart';
 import '../../SharedWidget/app_loading.dart';
 
 class MedicineOrder extends StatefulWidget {
-  MedicineOrderModel data;
+  PrescriptionModel data;
   MedicineOrder({Key? key, required this.data}) : super(key: key);
 
   @override
@@ -191,7 +192,7 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                                   height: 30,
 
                                                   child: Text(
-                                                      '${bloc.medicineOrder.draftMedicinePlans![index].amount}',
+                                                      '${bloc.prescriptionModel.draftMedicinePlans![index].amount}',
                                                       textAlign:
                                                           TextAlign.center),
                                                 ),
@@ -280,15 +281,15 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                                     .toString(),
                                             textAlign: TextAlign.left,
                                           )),
-                                      Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              1,
-                                          child: Text(
-                                            'Date : Null',
-                                            textAlign: TextAlign.left,
-                                          )),
+                                      // Container(
+                                      //     width: MediaQuery.of(context)
+                                      //             .size
+                                      //             .width *
+                                      //         1,
+                                      //     child: Text(
+                                      //       'Date : Null',
+                                      //       textAlign: TextAlign.left,
+                                      //     )),
                                       Container(
                                         height: 50,
                                         child: ElevatedButton(
@@ -302,7 +303,7 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                                   fontSize: 20)),
                                           onPressed: () {
                                             Navigator.pushNamed(
-                                                context, medicine_plan);
+                                                context, fee_list);
                                           },
                                           child: const Text('แก้ไข'),
                                         ),
@@ -331,9 +332,10 @@ class _MedicineOrderState extends State<MedicineOrder> {
                 primary: Colors.green,
                 textStyle: const TextStyle(fontSize: 20)),
             onPressed: () {
-              bloc.createOrder(context);
+              bloc.confirmOrder(context);
+              //null;
             },
-            child: const Text('ดูรายการที่สั่ง'),
+            child: const Text('ยืนยัน'),
           ),
         ),
         Container(

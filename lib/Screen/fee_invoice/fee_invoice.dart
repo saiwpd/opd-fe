@@ -19,6 +19,14 @@ class _FeeInvoiceState extends State<FeeInvoice> {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
         backgroundColor: Colors.white,
         automaticallyImplyLeading: true,
         centerTitle: true,
@@ -139,14 +147,14 @@ class _FeeInvoiceState extends State<FeeInvoice> {
         //     ],
         //   ),
         // ),
-        Expanded(
+        Container(
+          height: 450,
           child: Container(
             margin: const EdgeInsets.only(right: 20, left: 20, bottom: 10),
             decoration: BoxDecoration(
               color: const Color(0xffE8DEF8),
               borderRadius: BorderRadius.circular(12),
-            ),
-            height: 200,
+            ),            
             width: MediaQuery.of(context).size.width * 1,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,7 +162,8 @@ class _FeeInvoiceState extends State<FeeInvoice> {
               children: [
                 Container(
                   padding: EdgeInsets.only(left: 20, top: 20),
-                  child: Text('รายละเอียด'),
+                  child: Text('รายละเอียด',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 20, top: 20),
@@ -200,7 +209,8 @@ class _FeeInvoiceState extends State<FeeInvoice> {
                         ),
                       ]),
                 ),
-                Expanded(
+                Container(
+                  height: 250,
                   child: ListView.builder(
                       // padding: const EdgeInsets.all(20.0),
                       itemCount: widget.data.summary!.medicineFee!.length,
@@ -266,12 +276,15 @@ class _FeeInvoiceState extends State<FeeInvoice> {
             style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50)),
-                primary: Colors.green,
+                primary: widget.data.status == "PAID" ? Colors.grey : Colors.green,
                 textStyle: const TextStyle(fontSize: 20)),
-            onPressed: () {
+            onPressed: () {              
               Navigator.pushNamed(context, medicine_order);
             },
-            child: const Text('ชำระเงิน'),
+            child: Text(
+                            widget.data.status == "PAID"
+                                ? 'ชำระเงินแล้ว'
+                                : 'ชำระเงิน',),
           ),
         ),
       ]),

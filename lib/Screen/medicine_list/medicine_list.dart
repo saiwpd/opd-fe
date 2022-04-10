@@ -160,7 +160,7 @@ class _MedicineListState extends State<MedicineList> {
                                               height: 30,
 
                                               child: Text(
-                                                  bloc.medicinePlan
+                                                  bloc.medicineOrder
                                                           .draftMedicinePlans!
                                                           .where((x) =>
                                                               x.id ==
@@ -169,7 +169,7 @@ class _MedicineListState extends State<MedicineList> {
                                                                       index]
                                                                   .id)
                                                           .isNotEmpty
-                                                      ? '${bloc.medicinePlan.draftMedicinePlans!.firstWhere((x) => x.id == bloc.listOfMedicine[index].id).amount}'
+                                                      ? '${bloc.medicineOrder.draftMedicinePlans!.firstWhere((x) => x.id == bloc.listOfMedicine[index].id).amount}'
                                                       : "0",
                                                   textAlign: TextAlign.center),
                                             ),
@@ -217,8 +217,7 @@ class _MedicineListState extends State<MedicineList> {
                 primary: Colors.green,
                 textStyle: const TextStyle(fontSize: 20)),
             onPressed: () {
-              Navigator.pushNamed(context, medicine_order,
-                  arguments: bloc.medicinePlan);
+              bloc.createOrder(context);
             },
             child: const Text('ดูรายการที่สั่ง'),
           ),
