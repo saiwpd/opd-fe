@@ -48,39 +48,39 @@ class _MedicineOrderState extends State<MedicineOrder> {
       ),
       body: Column(children: [
         Container(
-          height: 30,
+          height: 10,
         ),
-        Center(
-            child: Container(
-          alignment: Alignment.center,
-          width: 350,
-          height: 50,
-          child: TextField(
-            textAlignVertical: TextAlignVertical.bottom,
-            textAlign: TextAlign.left,
-            decoration: new InputDecoration(
-              focusedBorder: const OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Colors.transparent, width: 0.0),
-                  borderRadius: BorderRadius.all(Radius.circular(50))),
-              enabledBorder: const OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Colors.transparent, width: 0.0),
-                  borderRadius: BorderRadius.all(Radius.circular(50))),
-              fillColor: Color(0xffE8DEF8),
-              filled: true,
-              suffixIcon: Icon(
-                Icons.search,
-                color: Color(0xFF65676B),
-              ),
-              hintText: 'ค้นหา...',
-              hintStyle: TextStyle(
-                  fontWeight: FontWeight.w300,
-                  color: Color(0xFF65676B),
-                  fontSize: 16),
-            ),
-          ),
-        )),
+        // Center(
+        //     child: Container(
+        //   alignment: Alignment.center,
+        //   width: 350,
+        //   height: 50,
+        //   child: TextField(
+        //     textAlignVertical: TextAlignVertical.bottom,
+        //     textAlign: TextAlign.left,
+        //     decoration: new InputDecoration(
+        //       focusedBorder: const OutlineInputBorder(
+        //           borderSide:
+        //               const BorderSide(color: Colors.transparent, width: 0.0),
+        //           borderRadius: BorderRadius.all(Radius.circular(50))),
+        //       enabledBorder: const OutlineInputBorder(
+        //           borderSide:
+        //               const BorderSide(color: Colors.transparent, width: 0.0),
+        //           borderRadius: BorderRadius.all(Radius.circular(50))),
+        //       fillColor: Color(0xffE8DEF8),
+        //       filled: true,
+        //       suffixIcon: Icon(
+        //         Icons.search,
+        //         color: Color(0xFF65676B),
+        //       ),
+        //       hintText: 'ค้นหา...',
+        //       hintStyle: TextStyle(
+        //           fontWeight: FontWeight.w300,
+        //           color: Color(0xFF65676B),
+        //           fontSize: 16),
+        //     ),
+        //   ),
+        // )),
         // Container(
         //   child: Column(children: <Widget>[
         //     SizedBox(height: 20.0),
@@ -116,10 +116,12 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10.0)),
                                 ),
-                                height: 220,
+                                height: 250,
                                 child: Column(children: <Widget>[
+                                  Container(height: 20),
                                   Row(
                                     children: <Widget>[
+                                      Container(width: 20),
                                       Expanded(
                                         flex: 2,
                                         child: Container(
@@ -216,7 +218,8 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                                 ),
                                               ]),
                                         ),
-                                      )
+                                      ),
+                                      Container(width: 20),
                                     ],
                                   ),
                                   Divider(
@@ -227,6 +230,7 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                   Column(
                                     children: [
                                       Container(
+                                          padding: EdgeInsets.only(left: 20),
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
@@ -236,6 +240,7 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                             textAlign: TextAlign.left,
                                           )),
                                       Container(
+                                          padding: EdgeInsets.only(left: 20),
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
@@ -245,6 +250,7 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                             textAlign: TextAlign.left,
                                           )),
                                       Container(
+                                          padding: EdgeInsets.only(left: 20),
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
@@ -254,6 +260,7 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                             textAlign: TextAlign.left,
                                           )),
                                       Container(
+                                          padding: EdgeInsets.only(left: 20),
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
@@ -268,6 +275,7 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                             textAlign: TextAlign.left,
                                           )),
                                       Container(
+                                          padding: EdgeInsets.only(left: 20),
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
@@ -291,21 +299,26 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                       //       textAlign: TextAlign.left,
                                       //     )),
                                       Container(
+                                        padding: EdgeInsets.only(right: 20),
                                         height: 50,
+                                        alignment: Alignment.centerRight,
                                         child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           50)),
-                                              primary: Colors.green,
+                                              primary: Color(0xffE8DEF8),
                                               textStyle: const TextStyle(
-                                                  fontSize: 20)),
+                                                  fontSize: 14)),
                                           onPressed: () {
                                             Navigator.pushNamed(
-                                                context, fee_list);
+                                                context, medicine_plan);
                                           },
-                                          child: const Text('แก้ไข'),
+                                          child: const Text('Edit',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 111, 54, 244))),
                                         ),
                                       ),
                                     ],
@@ -323,21 +336,44 @@ class _MedicineOrderState extends State<MedicineOrder> {
         Container(
           height: 40,
         ),
+
         Container(
-          height: 50,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)),
-                primary: Colors.green,
-                textStyle: const TextStyle(fontSize: 20)),
-            onPressed: () {
-              bloc.confirmOrder(context);
-              //null;
-            },
-            child: const Text('ยืนยัน'),
-          ),
-        ),
+            width: MediaQuery.of(context).size.width * 1,
+            height: 50,
+            child: Container(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      primary: Color(0xFFB65F5F),
+                      textStyle: const TextStyle(fontSize: 20)),
+                  onPressed: () {
+                    //bloc.confirmOrder(context);
+                    null;
+                  },
+                  child: const Text('ยกเลิก'),
+                ),
+                Container(
+                  width: 20,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      primary: Colors.green,
+                      textStyle: const TextStyle(fontSize: 20)),
+                  onPressed: () {
+                    bloc.confirmOrder(context);
+                    //null;
+                  },
+                  child: const Text('ยืนยัน'),
+                ),
+              ],
+            ))),
         Container(
           height: 10,
         ),

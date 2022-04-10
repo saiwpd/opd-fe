@@ -37,7 +37,7 @@ class _MedicineListState extends State<MedicineList> {
       ),
       body: Column(children: [
         Container(
-          height: 30,
+          height: 10,
         ),
         // Center(
         //     child: Container(
