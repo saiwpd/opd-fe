@@ -9,7 +9,7 @@ import '../bloc.dart';
 class FeeListBloc implements Bloc {
   StreamController<bool> getDataController = StreamController<bool>();
   FeeListService feeListService = FeeListService();
-  List<Fee> feeList = [];
+  List<FeeModel> feeList = [];
 
   Future<void> initPage() async {
     await feeListService

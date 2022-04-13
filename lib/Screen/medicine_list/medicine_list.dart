@@ -158,20 +158,33 @@ class _MedicineListState extends State<MedicineList> {
                                               // 60%
                                               width: 20,
                                               height: 30,
-
                                               child: Text(
-                                                  bloc.medicineOrder
+                                                  bloc.medicineOrderModel
                                                           .draftMedicinePlans!
                                                           .where((x) =>
-                                                              x.id ==
+                                                              x.medicineName ==
                                                               bloc
                                                                   .listOfMedicine[
                                                                       index]
-                                                                  .id)
+                                                                  .name)
                                                           .isNotEmpty
-                                                      ? '${bloc.medicineOrder.draftMedicinePlans!.firstWhere((x) => x.id == bloc.listOfMedicine[index].id).amount}'
+                                                      ? '${bloc.medicineOrderModel.draftMedicinePlans!.firstWhere((x) => x.medicineName == bloc.listOfMedicine[index].name).amount}'
                                                       : "0",
                                                   textAlign: TextAlign.center),
+
+                                              // child: Text(
+                                              //     bloc.medicineOrder
+                                              //             .draftMedicinePlans!
+                                              //             .where((x) =>
+                                              //                 x.id ==
+                                              //                 bloc
+                                              //                     .listOfMedicine[
+                                              //                         index]
+                                              //                     .id)
+                                              //             .isNotEmpty
+                                              //         ? '${bloc.medicineOrder.draftMedicinePlans!.firstWhere((x) => x.id == bloc.listOfMedicine[index].id).amount}'
+                                              //         : "0",
+                                              //     textAlign: TextAlign.center),
                                             ),
                                             InkWell(
                                               onTap: () {

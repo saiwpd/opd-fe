@@ -1,17 +1,17 @@
 // To parse this JSON data, do
 //
-//     final fee = feeFromJson(jsonString);
+//     final feeModel = feeModelFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Fee> feeFromJson(String str) => List<Fee>.from(json.decode(str).map((x) => Fee.fromJson(x)));
+List<FeeModel> feeModelFromJson(String str) => List<FeeModel>.from(json.decode(str).map((x) => FeeModel.fromJson(x)));
 
-String feeToJson(List<Fee> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String feeModelToJson(List<FeeModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Fee {
-    Fee({
+class FeeModel {
+    FeeModel({
         this.refId,
-        this.amount,
+        this.price,
         this.status,
         this.summary,
         this.createdAt,
@@ -20,16 +20,16 @@ class Fee {
     });
 
     String? refId;
-    int? amount;
+    int? price;
     String? status;
     Summary? summary;
     DateTime? createdAt;
     DateTime? updatedAt;
     String? bank;
 
-    factory Fee.fromJson(Map<String, dynamic> json) => Fee(
+    factory FeeModel.fromJson(Map<String, dynamic> json) => FeeModel(
         refId: json["refId"],
-        amount: json["amount"],
+        price: json["price"],
         status: json["status"],
         summary: Summary.fromJson(json["summary"]),
         createdAt: DateTime.parse(json["createdAt"]),
@@ -39,7 +39,7 @@ class Fee {
 
     Map<String, dynamic> toJson() => {
         "refId": refId,
-        "amount": amount,
+        "price": price,
         "status": status,
         "summary": summary?.toJson(),
         "createdAt": createdAt?.toIso8601String(),
@@ -72,22 +72,22 @@ class MedicineFee {
     MedicineFee({
         this.medicineName,
         this.amount,
-        this.totalPrice,
+        this.price,
     });
 
     String? medicineName;
     int? amount;
-    int? totalPrice;
+    int? price;
 
     factory MedicineFee.fromJson(Map<String, dynamic> json) => MedicineFee(
         medicineName: json["medicineName"],
         amount: json["amount"],
-        totalPrice: json["totalPrice"],
+        price: json["price"],
     );
 
     Map<String, dynamic> toJson() => {
         "medicineName": medicineName,
         "amount": amount,
-        "totalPrice": totalPrice,
+        "price": price,
     };
 }

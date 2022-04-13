@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import '../../routing_constants.dart';
 
 class FeeInvoice extends StatefulWidget {
-  Fee data;
+  FeeModel data;
   FeeInvoice({Key? key, required this.data}) : super(key: key);
 
   @override
@@ -234,7 +234,7 @@ class _FeeInvoiceState extends State<FeeInvoice> {
                                 Expanded(
                                   flex: 4,
                                   child: Text(widget.data.summary!
-                                      .medicineFee![index].totalPrice
+                                      .medicineFee![index].price
                                       .toString()),
                                 ),
                               ]),
@@ -257,7 +257,7 @@ class _FeeInvoiceState extends State<FeeInvoice> {
                         ),
                         Expanded(
                           flex: 4,
-                          child: Text("9999999999"),
+                          child: Text(widget.data.price.toString()),
                         ),
                       ]),
                 ),

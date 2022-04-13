@@ -3,7 +3,8 @@ import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../Models/Medicine_List_Model/Medicine_Model.dart';
-import '../../Models/Medicine_Plan_Model/medicine_plan_model.dart';
+import '../../Models/Medicine_Order_Model/Medicine_Order_Model.dart' as order_model;
+import '../../Models/Medicine_Plan_Model/medicine_plan_model.dart' as plan_model;
 import '../../Service/Medicine_List_Service/medicine_list_service.dart';
 import '../../Service/Medicine_Order_Service/medicine_order_service.dart';
 import '../bloc.dart';
@@ -12,63 +13,65 @@ class MedicineListBloc implements Bloc {
   StreamController<bool> getDataController = StreamController<bool>();
   MedicineListService medicineListservice = MedicineListService();
   List<Medicine> listOfMedicine = [];
-  MedicineOrderModel medicineOrder = MedicineOrderModel();
+  order_model.MedicineOrderModel medicineOrderModel = order_model.MedicineOrderModel();
+  plan_model.MedicinePlanModel medicinePlanModel = plan_model.MedicinePlanModel();
   MedicineOrderService medicineOrderservice = MedicineOrderService();
 
   Future<void> initPage() async {
-    medicineOrder.draftMedicinePlans = [];
+    medicineOrderModel.draftMedicinePlans = [];
+    medicinePlanModel.draftMedicinePlans = [];
     await medicineListservice.getMedicineList().then(
         (value) => {listOfMedicine = value, getDataController.sink.add(true)});
   }
 
-  Future<void> getData(MedicineOrderModel data) async {
-    medicineOrder = data;
+  Future<void> getData(order_model.MedicineOrderModel data) async {
+    medicineOrderModel = data;
     getDataController.sink.add(true);
   }
 
   void increseMedicine(Medicine data) {
-    if (medicineOrder.draftMedicinePlans!.isNotEmpty) {
-      if (medicineOrder.draftMedicinePlans!
-          .where((x) => x.id == data.id)
+    if (medicineOrderModel.draftMedicinePlans!.isNotEmpty) {
+      if (medicineOrderModel.draftMedicinePlans!
+          .where((x) => x.medicineName == data.name)
           .isNotEmpty) {
-        medicineOrder.draftMedicinePlans!
-            .firstWhere((x) => x.id == data.id)
-            .amount = medicineOrder.draftMedicinePlans!
-                .firstWhere((x) => x.id == data.id)
+        medicineOrderModel.draftMedicinePlans!
+            .firstWhere((x) => x.medicineName == data.name)
+            .amount = medicineOrderModel.draftMedicinePlans!
+                .firstWhere((x) => x.medicineName == data.name)
                 .amount! +
             1;
         getDataController.sink.add(true);
       } else {
-        DraftMedicinePlan mockData = DraftMedicinePlan(
-            id: data.id,
+        order_model.DraftMedicinePlan mockData = order_model.DraftMedicinePlan(
+            //id: data.id,
             medicineName: data.name,
             weight: data.weight,
             amount: 1,
             properties: data.properties);
-        medicineOrder.draftMedicinePlans!.add(mockData);
+        medicineOrderModel.draftMedicinePlans!.add(mockData);
         getDataController.sink.add(true);
       }
     } else {
-      DraftMedicinePlan mockData = DraftMedicinePlan(
-          id: data.id,
+      order_model.DraftMedicinePlan mockData = order_model.DraftMedicinePlan(
+          //id: data.id,
           medicineName: data.name,
           weight: data.weight,
           amount: 1,
           properties: data.properties);
-      medicineOrder.draftMedicinePlans!.add(mockData);
+      medicineOrderModel.draftMedicinePlans!.add(mockData);
       getDataController.sink.add(true);
     }
   }
 
   void decreseMedicine(Medicine data) {
-    if (medicineOrder.draftMedicinePlans!.isNotEmpty) {
-      if (medicineOrder.draftMedicinePlans!
-          .where((x) => x.id == data.id)
+    if (medicineOrderModel.draftMedicinePlans!.isNotEmpty) {
+      if (medicineOrderModel.draftMedicinePlans!
+          .where((x) => x.medicineName == data.name)
           .isNotEmpty) {
-        medicineOrder.draftMedicinePlans!
-            .firstWhere((x) => x.id == data.id)
-            .amount = medicineOrder.draftMedicinePlans!
-                .firstWhere((x) => x.id == data.id)
+        medicineOrderModel.draftMedicinePlans!
+            .firstWhere((x) => x.medicineName == data.name)
+            .amount = medicineOrderModel.draftMedicinePlans!
+                .firstWhere((x) => x.medicineName == data.name)
                 .amount! -
             1;
         getDataController.sink.add(true);
@@ -77,10 +80,8 @@ class MedicineListBloc implements Bloc {
   }
 
   void createOrder(BuildContext context) async {
-    medicineOrder.draftMedicinePlans!.forEach((x) {
-      x.id = null;
-      x.remark = x.remark == null ? "" : x.remark;
-      x.dosage = x.dosage == null ? 1 : x.dosage;
+    medicineOrderModel.draftMedicinePlans!.forEach((x) {
+      //x.id = null;
       if (x.dosageMeals == null) {
         x.dosageMeals = ["MORNING", "AFTERNOON", "EVENING", "NIGHT"];
       }
@@ -89,7 +90,7 @@ class MedicineListBloc implements Bloc {
       }
     });
 
-    var result = await medicineListservice.addMedicineOrder(medicineOrder); 
+    var result = await medicineListservice.addMedicineOrder(medicineOrderModel); 
     if (result != null) 
     {
       Navigator.pushNamed(context, medicine_order,arguments: result);

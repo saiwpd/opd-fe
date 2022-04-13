@@ -16,28 +16,15 @@ class MedicineOrderService {
   //   }
   // }
 
-  Future<bool> editMedicineOrder(MedicineOrderModel senddata) async {
-    var response = await http.put(
-        Uri.parse(
-          "http://192.168.1.125:3000/prescriptions/$senddata",
-        ),
-        body: medicinePlanToJson(senddata));
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      throw Exception('Failed');
-    }
-  }
-
-  Future<bool> confirmMedicineOrder(String? id) async {
+  Future<bool> confirmMedicineOrder(MedicinePlanModel senddata) async {
     var response = await http.post(
         Uri.parse(
-          "http://localhost:3000/prescriptions/$id/confirm",
+          "http://localhost:3000/prescriptions/confirm",
         ),
-        // headers: <String, String>{
-        //   'Content-Type': 'application/json; charset=UTF-8',
-        // },
-        // body: medicinePlanToJson(id)
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: medicinePlanModelToJson(senddata)
         );
     if (response.statusCode == 201) {
       return true;

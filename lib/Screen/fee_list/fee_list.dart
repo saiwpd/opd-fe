@@ -35,9 +35,6 @@ class _FeeListState extends State<FeeList> {
         ),
       ),
       body: Column(children: [
-        Container(
-          height: 30,
-        ),
         StreamBuilder(
             stream: bloc.getDataController.stream,
             builder: (context, AsyncSnapshot<bool> snapshot) {
@@ -85,7 +82,7 @@ class _FeeListState extends State<FeeList> {
                                           Text(
                                               '${bloc.feeList[index].createdAt.toString()}'),
                                           Text(
-                                              'ค่าบริการ ${bloc.feeList[index].amount} บาท'),
+                                              'ค่าบริการ ${bloc.feeList[index].price} บาท'),
                                         ],
                                       )),
                                   Expanded(

@@ -2,6 +2,7 @@ import 'package:appname/Models/Prescription_Model/Prescription_Model.dart';
 import 'package:http/http.dart' as http;
 
 import '../../Models/Medicine_List_Model/Medicine_Model.dart';
+import '../../Models/Medicine_Order_Model/Medicine_Order_Model.dart';
 import '../../Models/Medicine_Plan_Model/medicine_plan_model.dart';
 
 class MedicineListService {
@@ -17,7 +18,7 @@ class MedicineListService {
     }
   }
 
-  Future<PrescriptionModel> addMedicineOrder(MedicineOrderModel senddata) async {
+  Future<MedicinePlanModel> addMedicineOrder(MedicineOrderModel senddata) async {
     var response = await http.post(
         Uri.parse(
           "http://localhost:3000/prescriptions",
@@ -25,9 +26,9 @@ class MedicineListService {
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
-        body: medicinePlanToJson(senddata));
+        body: medicineOrderModelToJson(senddata));
     if (response.statusCode == 201) {
-      return prescriptionFromJson(response.body);
+      return medicinePlanModelFromJson(response.body);
     } else {
       throw Exception('Failed');
     }

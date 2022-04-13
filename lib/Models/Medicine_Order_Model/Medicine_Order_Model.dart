@@ -1,21 +1,21 @@
 // To parse this JSON data, do
 //
-//     final medicinePlanModel = medicinePlanModelFromJson(jsonString);
+//     final medicineOrderModel = medicineOrderModelFromJson(jsonString);
 
 import 'dart:convert';
 
-MedicinePlanModel medicinePlanModelFromJson(String str) => MedicinePlanModel.fromJson(json.decode(str));
+MedicineOrderModel medicineOrderModelFromJson(String str) => MedicineOrderModel.fromJson(json.decode(str));
 
-String medicinePlanModelToJson(MedicinePlanModel data) => json.encode(data.toJson());
+String medicineOrderModelToJson(MedicineOrderModel data) => json.encode(data.toJson());
 
-class MedicinePlanModel {
-    MedicinePlanModel({
+class MedicineOrderModel {
+    MedicineOrderModel({
         this.draftMedicinePlans,
     });
 
     List<DraftMedicinePlan>? draftMedicinePlans;
 
-    factory MedicinePlanModel.fromJson(Map<String, dynamic> json) => MedicinePlanModel(
+    factory MedicineOrderModel.fromJson(Map<String, dynamic> json) => MedicineOrderModel(
         draftMedicinePlans: List<DraftMedicinePlan>.from(json["draftMedicinePlans"].map((x) => DraftMedicinePlan.fromJson(x))),
     );
 
@@ -26,7 +26,6 @@ class MedicinePlanModel {
 
 class DraftMedicinePlan {
     DraftMedicinePlan({
-        this.id,
         this.medicineName,
         this.properties,
         this.amount,
@@ -37,7 +36,6 @@ class DraftMedicinePlan {
         this.weight,
     });
 
-    String? id;
     String? medicineName;
     String? properties;
     int? amount;
@@ -48,7 +46,6 @@ class DraftMedicinePlan {
     int? weight;
 
     factory DraftMedicinePlan.fromJson(Map<String, dynamic> json) => DraftMedicinePlan(
-        id: json["_id"],
         medicineName: json["medicineName"],
         properties: json["properties"],
         amount: json["amount"],
@@ -60,7 +57,6 @@ class DraftMedicinePlan {
     );
 
     Map<String, dynamic> toJson() => {
-        "_id": id,
         "medicineName": medicineName,
         "properties": properties,
         "amount": amount,

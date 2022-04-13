@@ -9,7 +9,7 @@ import '../../Service/Medicine_List_Service/medicine_list_service.dart';
 import '../../SharedWidget/app_loading.dart';
 
 class MedicineOrder extends StatefulWidget {
-  PrescriptionModel data;
+  MedicinePlanModel data;
   MedicineOrder({Key? key, required this.data}) : super(key: key);
 
   @override
@@ -194,7 +194,7 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                                   height: 30,
 
                                                   child: Text(
-                                                      '${bloc.prescriptionModel.draftMedicinePlans![index].amount}',
+                                                      '${bloc.medicinePlanModel.draftMedicinePlans![index].amount}',
                                                       textAlign:
                                                           TextAlign.center),
                                                 ),
@@ -313,7 +313,8 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                                   fontSize: 14)),
                                           onPressed: () {
                                             Navigator.pushNamed(
-                                                context, medicine_plan);
+                                                        context, medicine_plan,
+                                                        arguments: widget.data.draftMedicinePlans![index]);
                                           },
                                           child: const Text('Edit',
                                               style: TextStyle(
@@ -350,6 +351,7 @@ class _MedicineOrderState extends State<MedicineOrder> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                       primary: Color(0xFFB65F5F),
+                      fixedSize: const Size(100, 50),
                       textStyle: const TextStyle(fontSize: 20)),
                   onPressed: () {
                     //bloc.confirmOrder(context);
@@ -365,6 +367,7 @@ class _MedicineOrderState extends State<MedicineOrder> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                       primary: Colors.green,
+                      fixedSize: const Size(100, 50),
                       textStyle: const TextStyle(fontSize: 20)),
                   onPressed: () {
                     bloc.confirmOrder(context);

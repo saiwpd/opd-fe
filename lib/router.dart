@@ -1,8 +1,9 @@
 import 'package:appname/Models/Fee_List_Model/Fee_Model.dart';
+import 'package:appname/Models/Medicine_Plan_Model/medicine_plan_model.dart';
+import 'package:appname/Models/Medicine_Plan_Model/medicine_plan_model.dart' as plan_model;
 import 'package:appname/Models/Prescription_Model/Prescription_Model.dart';
 import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
-import 'Models/Medicine_Plan_Model/medicine_plan_model.dart';
 import 'Screen/medicine_list/medicine_list.dart';
 import 'Screen/medicine_order/medicine_order.dart';
 import 'Screen/medicine_plan/medicine_plan.dart';
@@ -19,10 +20,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case medicine_order:
       return MaterialPageRoute(
           builder: (context) => MedicineOrder(
-                data: settings.arguments as PrescriptionModel,
+                data: settings.arguments as MedicinePlanModel,
               ));
     case medicine_plan:
-      return MaterialPageRoute(builder: (context) => MedicinePlan());
+      return MaterialPageRoute(
+          builder: (context) => MedicinePlan(
+                data: settings.arguments as plan_model.DraftMedicinePlan,
+              ));
     case fee_list:
       return MaterialPageRoute(
           builder: (context) => FeeList(
@@ -31,7 +35,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case fee_invioce:
       return MaterialPageRoute(
           builder: (context) => FeeInvoice(
-                data: settings.arguments as Fee,
+                data: settings.arguments as FeeModel,
               ));
     case fee_reciept:
       return MaterialPageRoute(
