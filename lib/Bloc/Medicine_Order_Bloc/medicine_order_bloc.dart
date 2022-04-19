@@ -1,10 +1,6 @@
 import 'dart:async';
-import 'package:appname/Models/Prescription_Model/Prescription_Model.dart';
-import 'package:appname/Screen/medicine_order/medicine_order.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
-
-import '../../Models/Medicine_List_Model/Medicine_Model.dart';
-import '../../Models/Medicine_Plan_Model/medicine_plan_model.dart';
 import '../../Models/Medicine_Plan_Model/medicine_plan_model.dart';
 import '../../Service/Medicine_Order_Service/medicine_order_service.dart';
 import '../../routing_constants.dart';
@@ -40,13 +36,40 @@ class MedicineOrderBloc implements Bloc {
   }
 
   void confirmOrder(BuildContext context) async {
-    await medicineOrderservice.confirmMedicineOrder(medicinePlanModel).then((value) => {
-          if (value) {Navigator.pushNamed(context, fee_list)}
-        });
+    await medicineOrderservice
+        .confirmMedicineOrder(medicinePlanModel)
+        .then((value) => {
+              if (value) {Navigator.pushNamed(context, fee_list)}
+            });
   }
 
   void sendDataToPlan(BuildContext context) async {
     Navigator.pushNamed(context, medicine_plan);
+  }
+
+  void recieveData(Object? data) {
+    var toDynamic;
+    String jsondata;
+    DraftMedicinePlan dataAfterEncode;
+    jsondata = jsonEncode(data);
+    toDynamic = jsonDecode(jsondata);
+    dataAfterEncode = DraftMedicinePlan.fromJson(toDynamic);
+
+
+medicinePlanModel.draftMedicinePlans!
+            .firstWhere((x) => x.id == dataAfterEncode.id)
+            .dosage = dataAfterEncode.dosage;
+            medicinePlanModel.draftMedicinePlans!
+            .firstWhere((x) => x.id == dataAfterEncode.id)
+            .remark = dataAfterEncode.remark;
+            medicinePlanModel.draftMedicinePlans!
+            .firstWhere((x) => x.id == dataAfterEncode.id).dosageMeals = dataAfterEncode.dosageMeals;
+            medicinePlanModel.draftMedicinePlans!
+            .firstWhere((x) => x.id == dataAfterEncode.id).dosageTimes = dataAfterEncode.dosageTimes;
+getDataController.sink.add(true);
+
+
+
   }
 
   @override

@@ -12,35 +12,67 @@ class MedicinePlanBloc implements Bloc {
   MedicinePlanModel medicinePlanModel = MedicinePlanModel();
   DraftMedicinePlan draftMedicinePlan = DraftMedicinePlan();
   MedicinePlanService medicinePlanService = MedicinePlanService();
+  bool isMorning = false;
+  bool isAfternoon = false;
+  bool isEvening = false;
+  bool isNight = false;
+  bool isBeforeFood = false;
+  bool isAfterFood = false;
+
+  TextEditingController dosage = TextEditingController();
+  TextEditingController scale = TextEditingController();
+  TextEditingController note = TextEditingController();
   // PrescriptionModel prescriptionModel = PrescriptionModel();
 
   Future<void> initPage(DraftMedicinePlan data) async {
     medicinePlanModel.draftMedicinePlans = [];
-    medicinePlanModel.draftMedicinePlans?.add(draftMedicinePlan);
-    draftMedicinePlan = data;
+    medicinePlanModel.draftMedicinePlans?.add(data);
+    medicinePlanModel.draftMedicinePlans?[0].dosageMeals?.clear();
+    
+    medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.clear();
     getDataController.sink.add(true);
   }
 
   void confirmPlan(BuildContext context) async {
-    // medicinePlanModel.draftMedicinePlans?.add(draftMedicinePlan);
-    // medicinePlanModel.draftMedicinePlans!.forEach((x) {
-    //   //x.id = null;
-    //   if (x.dosageMeals == null) {
-    //     x.dosageMeals = ["MORNING", "AFTERNOON", "EVENING", "NIGHT"];
-    //   }
-    //   if (x.dosageTimes == null) {
-    //     x.dosageTimes = ["BEFORE", "AFTER"];
-    //   }
-    // });
-    
-    var result = await medicinePlanService.editMedicinePlan(medicinePlanModel);
-    if (result != null) {
-      Navigator.pop(context, result);
+
+    medicinePlanModel.draftMedicinePlans?[0].dosage =  int.parse(dosage.text);
+    medicinePlanModel.draftMedicinePlans?[0].remark =  note.text;
+
+    if(isMorning)
+    {
+medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.add("เช้า");
+    }
+    if(isAfternoon)
+    {
+      medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.add("กลางวัน");
+    }
+    if(isEvening)
+    {
+      medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.add("เย็น");
+    }
+    if(isNight)
+    {
+      medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.add("ก่อนนอน");
+    }
+        if(isAfterFood)
+    {
+      medicinePlanModel.draftMedicinePlans?[0].dosageMeals?.add("ก่อนนอน");
+    }
+        if(isBeforeFood)
+    {
+      medicinePlanModel.draftMedicinePlans?[0].dosageMeals?.add("ก่อนนอน");
+    }
+
+  await medicinePlanService.editMedicinePlan(medicinePlanModel).then((value) => {
+ 
+      Navigator.pop(context, value.draftMedicinePlans?[0])
       // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MedicineOrder(
       //           data: settings.arguments as MedicinePlanModel,
       //         )));
       
-    };
+    
+    });
+  
   }
 
   @override

@@ -44,7 +44,7 @@ class _MedicinePlanState extends State<MedicinePlan> {
                 color: Colors.black,
               ),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(context, widget.data);
               }),
           centerTitle: true,
           title: Text(
@@ -94,6 +94,7 @@ class _MedicinePlanState extends State<MedicinePlan> {
                           children: [
                             Text('สรรพคุณ : '),
                             TextField(
+                              readOnly: true,
                               controller: new TextEditingController(
                                   text: widget.data.properties),
                               decoration: InputDecoration(
@@ -119,8 +120,7 @@ class _MedicinePlanState extends State<MedicinePlan> {
                                   keyboardType: TextInputType.number,
                                   inputFormatters: <TextInputFormatter>[
     FilteringTextInputFormatter.digitsOnly],
-                                  // controller: new TextEditingController(
-                                  //     text: widget.data.dosage),
+                                  controller: bloc.dosage,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
                                   ),
@@ -139,8 +139,9 @@ class _MedicinePlanState extends State<MedicinePlan> {
                               children: [
                                 Text('หน่วย : '),
                                 TextField(
+                                  readOnly: true,
                                   controller:
-                                      new TextEditingController(text: 'เม็ด'),
+                                       new TextEditingController(text: 'เม็ด'),
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
                                   ),
@@ -168,20 +169,47 @@ class _MedicinePlanState extends State<MedicinePlan> {
                                       BorderRadius.all(Radius.circular(5.0)),
                                 ),
                                 child: Column(
-                                  children: dosageTimes
-                                      .map((t) => CheckboxListTile(
-                                            title: Text(t),
-                                            value: _isChecked,
+                                  children: [
+                                   CheckboxListTile(
+                                            title: Text(dosageTimes[0]),
+                                            value: bloc.isMorning,
                                             onChanged: (val) {
                                               setState(() {
-                                                _isChecked = val!;
-                                                if (val == true) {
-                                                  _currText = t;
-                                                }
+                                                bloc.isMorning = val!;
+                                           
                                               });
                                             },
-                                          ))
-                                      .toList(),
+                                          ),
+                                          CheckboxListTile(
+                                            title: Text(dosageTimes[1]),
+                                            value: bloc.isAfternoon,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                bloc.isAfternoon = val!;
+                                          
+                                              });
+                                            },
+                                          ),
+                                          CheckboxListTile(
+                                            title: Text(dosageTimes[2]),
+                                            value: bloc.isEvening,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                bloc.isEvening = val!;
+                                              
+                                              });
+                                            },
+                                          ),
+                                          CheckboxListTile(
+                                            title: Text(dosageTimes[3]),
+                                            value: bloc.isNight,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                bloc.isNight = val!;
+                                              });
+                                            },
+                                          )
+                                  ]
                                 ),
                               )
                             ]),
@@ -204,20 +232,26 @@ class _MedicinePlanState extends State<MedicinePlan> {
                                       BorderRadius.all(Radius.circular(5.0)),
                                 ),
                                 child: Column(
-                                  children: dosageMeals
-                                      .map((t) => CheckboxListTile(
-                                            title: Text(t),
-                                            value: _isChecked,
+                                  children: [
+                                     CheckboxListTile(
+                                            title: Text(dosageMeals[0]),
+                                            value: bloc.isBeforeFood,
                                             onChanged: (val) {
                                               setState(() {
-                                                _isChecked = val!;
-                                                if (val == true) {
-                                                  _currText = t;
-                                                }
+                                                bloc.isBeforeFood = val!;
                                               });
                                             },
-                                          ))
-                                      .toList(),
+                                          ),
+                                           CheckboxListTile(
+                                            title: Text(dosageMeals[1]),
+                                            value: bloc.isAfterFood,
+                                            onChanged: (val) {
+                                              setState(() {
+                                                bloc.isAfterFood = val!;
+                                              });
+                                            },
+                                          )
+                                  ]
                                 ),
                               )
                             ]),
@@ -233,7 +267,7 @@ class _MedicinePlanState extends State<MedicinePlan> {
                           children: [
                             Text('หมายเหตุ : '),
                             TextField(
-                              controller: controller,
+                              controller: bloc.note,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                               ),

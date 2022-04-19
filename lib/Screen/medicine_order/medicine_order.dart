@@ -1,11 +1,11 @@
-import 'package:appname/Models/Prescription_Model/Prescription_Model.dart';
+import 'dart:convert';
+
 import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../Bloc/Medicine_Order_Bloc/medicine_order_bloc.dart';
 import '../../Models/Medicine_List_Model/Medicine_Model.dart';
 import '../../Models/Medicine_Plan_Model/medicine_plan_model.dart';
-import '../../Service/Medicine_List_Service/medicine_list_service.dart';
 import '../../SharedWidget/app_loading.dart';
 
 class MedicineOrder extends StatefulWidget {
@@ -313,8 +313,12 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                                   fontSize: 14)),
                                           onPressed: () {
                                             Navigator.pushNamed(
-                                                        context, medicine_plan,
-                                                        arguments: widget.data.draftMedicinePlans![index]);
+                                                    context, medicine_plan,
+                                                    arguments: widget.data
+                                                            .draftMedicinePlans![
+                                                        index])
+                                                .then((value) =>
+                                                    {bloc.recieveData(value)});
                                           },
                                           child: const Text('Edit',
                                               style: TextStyle(

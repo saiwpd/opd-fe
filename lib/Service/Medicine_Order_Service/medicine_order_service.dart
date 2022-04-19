@@ -19,7 +19,7 @@ class MedicineOrderService {
   Future<bool> confirmMedicineOrder(MedicinePlanModel senddata) async {
     var response = await http.post(
         Uri.parse(
-          "http://localhost:3000/prescriptions/confirm",
+          "http://192.168.1.154:3000/prescriptions/confirm",
         ),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
