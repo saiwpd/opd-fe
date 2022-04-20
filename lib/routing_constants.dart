@@ -7,3 +7,4 @@ const String fee_list = 'fee_list';
 const String fee_invioce = 'fee_invioce';
 const String fee_reciept = 'fee_reciept';
 const String prescription_list = 'prescription_list';
+const String payment = 'payment';

@@ -30,6 +30,14 @@ class _PrescrptionListState extends State<PrescriptionList> {
         backgroundColor: Colors.white,
         automaticallyImplyLeading: true,
         centerTitle: true,
+         leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
         title: Text(
           "รายการใบสั่งยา",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),

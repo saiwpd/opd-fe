@@ -28,51 +28,42 @@ class MedicinePlanBloc implements Bloc {
     medicinePlanModel.draftMedicinePlans = [];
     medicinePlanModel.draftMedicinePlans?.add(data);
     medicinePlanModel.draftMedicinePlans?[0].dosageMeals?.clear();
-    
+
     medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.clear();
     getDataController.sink.add(true);
   }
 
   void confirmPlan(BuildContext context) async {
+    medicinePlanModel.draftMedicinePlans?[0].dosage = int.parse(dosage.text);
+    medicinePlanModel.draftMedicinePlans?[0].remark = note.text;
 
-    medicinePlanModel.draftMedicinePlans?[0].dosage =  int.parse(dosage.text);
-    medicinePlanModel.draftMedicinePlans?[0].remark =  note.text;
-
-    if(isMorning)
-    {
-medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.add("เช้า");
+    if (isMorning) {
+      medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.add("เช้า");
     }
-    if(isAfternoon)
-    {
+    if (isAfternoon) {
       medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.add("กลางวัน");
     }
-    if(isEvening)
-    {
+    if (isEvening) {
       medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.add("เย็น");
     }
-    if(isNight)
-    {
+    if (isNight) {
       medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.add("ก่อนนอน");
     }
-        if(isAfterFood)
-    {
-      medicinePlanModel.draftMedicinePlans?[0].dosageMeals?.add("ก่อนนอน");
+    if (isAfterFood) {
+      medicinePlanModel.draftMedicinePlans?[0].dosageMeals?.add("หลังอาหาร");
     }
-        if(isBeforeFood)
-    {
-      medicinePlanModel.draftMedicinePlans?[0].dosageMeals?.add("ก่อนนอน");
+    if (isBeforeFood) {
+      medicinePlanModel.draftMedicinePlans?[0].dosageMeals?.add("ก่อนอาหาร");
     }
 
-  await medicinePlanService.editMedicinePlan(medicinePlanModel).then((value) => {
- 
-      Navigator.pop(context, value.draftMedicinePlans?[0])
-      // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MedicineOrder(
-      //           data: settings.arguments as MedicinePlanModel,
-      //         )));
-      
-    
-    });
-  
+    await medicinePlanService
+        .editMedicinePlan(medicinePlanModel)
+        .then((value) => {
+              Navigator.pop(context, value.draftMedicinePlans?[0])
+              // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MedicineOrder(
+              //           data: settings.arguments as MedicinePlanModel,
+              //         )));
+            });
   }
 
   @override

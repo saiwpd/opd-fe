@@ -5,7 +5,7 @@ class MedicinePlanService {
   Future<MedicinePlanModel> editMedicinePlan(MedicinePlanModel senddata) async {
     var response = await http.put(
         Uri.parse(
-          "http://192.168.1.154:3000/prescriptions",
+          "http://localhost:3000/prescriptions",
         ),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',

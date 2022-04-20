@@ -29,6 +29,14 @@ class _FeeListState extends State<FeeList> {
         backgroundColor: Colors.white,
         automaticallyImplyLeading: true,
         centerTitle: true,
+        leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
         title: Text(
           "รายการใบสรุปค่าบริการ",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
@@ -59,15 +67,8 @@ class _FeeListState extends State<FeeList> {
                                   Expanded(
                                     flex: 2,
                                     child: Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                            color: Color.fromARGB(
-                                                255, 111, 54, 244),
-                                            width: 1),
-                                        //borderRadius: BorderRadius.all(Radius.circular(100.0)), color: Color(0xffE8DEF8),
-                                      ),
-                                      height: 40,
+                                      child: (bloc.feeList[index].status == "PAID" ? Image.asset('assets/images/payment.png', fit: BoxFit.fitHeight,) : Image.asset('assets/images/invoice.png', fit: BoxFit.fitHeight,)),
+                                      height: 50,
                                     ),
                                   ),
                                   Expanded(
@@ -106,12 +107,12 @@ class _FeeListState extends State<FeeList> {
                                                                   BorderRadius
                                                                       .circular(
                                                                           50)),
-                                                      primary:
+                                                      primary: 
                                                           bloc.feeList[index]
                                                                       .status ==
                                                                   "PAID"
-                                                              ? Colors.blue
-                                                              : Colors.green,
+                                                              ? Colors.green
+                                                              : Colors.blue,
                                                       textStyle:
                                                           const TextStyle(
                                                               fontSize: 14)),

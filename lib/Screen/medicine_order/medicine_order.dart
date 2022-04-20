@@ -125,6 +125,7 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                       Expanded(
                                         flex: 2,
                                         child: Container(
+                                          child: Image.asset('assets/images/medicine.png'),
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             border: Border.all(
@@ -133,7 +134,7 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                                 width: 1),
                                             //borderRadius: BorderRadius.all(Radius.circular(100.0)), color: Color(0xffE8DEF8),
                                           ),
-                                          height: 40,
+                                          height: 50,
                                         ),
                                       ),
                                       Expanded(

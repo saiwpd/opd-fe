@@ -8,7 +8,7 @@ import '../../Models/Medicine_Plan_Model/medicine_plan_model.dart';
 class MedicineListService {
   Future<List<Medicine>> getMedicineList() async {
     var response = await http.get(
-      Uri.parse("http://192.168.1.154:3000/medicines"),
+      Uri.parse("http://localhost:3000/medicines"),
     );
     if (response.statusCode == 200) {
       var result = medicineFromJson(response.body);
@@ -21,7 +21,7 @@ class MedicineListService {
   Future<MedicinePlanModel> addMedicineOrder(MedicineOrderModel senddata) async {
     var response = await http.post(
         Uri.parse(
-          "http://192.168.1.154:3000/prescriptions",
+          "http://localhost:3000/prescriptions",
         ),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',

@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'OPD',
       onGenerateRoute: generateRoute,
-      initialRoute: medicine_list,
+      initialRoute: homeRoute,
     );
   }
 }

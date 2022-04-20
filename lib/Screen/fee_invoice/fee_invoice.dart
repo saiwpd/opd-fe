@@ -109,7 +109,7 @@ class _FeeInvoiceState extends State<FeeInvoice> {
                             Container(
                               padding: EdgeInsets.only(left: 5, top: 20),
                               width: MediaQuery.of(context).size.width * 0.4,
-                              child: Text('ธนาคารกสิกรไทย'),
+                              child: Text(widget.data.bank.toString()),
                             ),
                           ],
                         )
@@ -276,14 +276,19 @@ class _FeeInvoiceState extends State<FeeInvoice> {
             style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50)),
-                primary: widget.data.status == "PAID" ? Colors.grey : Colors.green,
+                primary:
+                    widget.data.status == "PAID" ? Colors.grey : Colors.green,
                 textStyle: const TextStyle(fontSize: 20)),
-            onPressed: () {              
-              Navigator.pushNamed(context, medicine_order);
+            onPressed: () {
+              if (widget.data.status == "UNPAID") {
+                Navigator.pushNamed(context, payment,
+                    arguments: widget.data.refId.toString());
+              } else {
+                null;
+              }
             },
             child: Text(
-                            widget.data.status == "PAID"
-                                ? 'ชำระเงินแล้ว'
+              widget.data.status == "PAID" ? 'ชำระเงินแล้ว'
                                 : 'ชำระเงิน',),
           ),
         ),

@@ -3,6 +3,8 @@ import 'package:appname/Models/Medicine_Plan_Model/medicine_plan_model.dart';
 import 'package:appname/Models/Medicine_Plan_Model/medicine_plan_model.dart' as plan_model;
 import 'package:appname/Models/Prescription_List_model/Prescription_Model.dart';
 import 'package:appname/Models/Prescription_Model/Prescription_Model.dart';
+import 'package:appname/Screen/menu/menu.dart';
+import 'package:appname/Screen/payment/payment.dart';
 import 'package:appname/Screen/prescription_list/prescription_list.dart';
 import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +18,7 @@ import 'Screen/fee_receipt/fee_receipt.dart';
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case homeRoute:
-      return MaterialPageRoute(builder: (context) => MedicineList());
+      return MaterialPageRoute(builder: (context) => Menu());
     case medicine_list:
       return MaterialPageRoute(builder: (context) => MedicineList());
     case medicine_order:
@@ -45,9 +47,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
               //data: settings.arguments,
               ));
     case prescription_list:
+      return MaterialPageRoute(builder: ((context) => PrescriptionList()));
+    case payment:
       return MaterialPageRoute(
-        builder: ((context) => PrescriptionList())
-      );
+          builder: (context) => Payment(
+                data: settings.arguments as String,
+              ));
     default:
       return MaterialPageRoute(builder: (context) => MedicineList());
   }

@@ -82,11 +82,12 @@ class MedicineListBloc implements Bloc {
   void createOrder(BuildContext context) async {
     medicineOrderModel.draftMedicinePlans!.forEach((x) {
       //x.id = null;
+      x.dosage = 0;
       if (x.dosageTimes == null) {
-        x.dosageTimes = ["MORNING", "AFTERNOON", "EVENING", "NIGHT"];
+        x.dosageTimes = [];
       }
       if (x.dosageMeals == null) {
-        x.dosageMeals = ["BEFORE", "AFTER"];
+        x.dosageMeals = [];
       }
     });
 

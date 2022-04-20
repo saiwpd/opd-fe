@@ -30,6 +30,14 @@ class _MedicineListState extends State<MedicineList> {
         backgroundColor: Colors.white,
         automaticallyImplyLeading: true,
         centerTitle: true,
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
         title: Text(
           "รายการยาทั้งหมด",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
@@ -94,15 +102,8 @@ class _MedicineListState extends State<MedicineList> {
                                   Expanded(
                                     flex: 2,
                                     child: Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                            color: Color.fromARGB(
-                                                255, 111, 54, 244),
-                                            width: 1),
-                                        //borderRadius: BorderRadius.all(Radius.circular(100.0)), color: Color(0xffE8DEF8),
-                                      ),
-                                      height: 40,
+                                      child: Image.asset('assets/images/medicine.png'),
+                                      height: 50,                                      
                                     ),
                                   ),
                                   Expanded(
@@ -236,7 +237,7 @@ class _MedicineListState extends State<MedicineList> {
           ),
         ),
         Container(
-          height: 10,
+          height: 20,
         ),
       ]),
     );
