@@ -375,7 +375,57 @@ class _MedicineOrderState extends State<MedicineOrder> {
                       fixedSize: const Size(100, 50),
                       textStyle: const TextStyle(fontSize: 20)),
                   onPressed: () {
-                    bloc.confirmOrder(context);
+showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) => Container(
+                                        child: AlertDialog(
+                                          title: Center(
+                                            child: Text(
+                                              'เมื่อยืนยันการสั่งยาแล้ว\nระบบจะส่งการแจ้งเตือนหาเภสัชกร',
+                                              
+                                              style: TextStyle(
+                                                  color: Colors.orange,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w100),
+                                            ),
+                                          ),
+                                          content: Text(
+                                              'คุณต้องการยืนยันการสั่งยา',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: Colors.orange,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w100),
+                                            ),
+                                        
+                                          actions: <Widget>[
+                                            TextButton(
+                                              style: ButtonStyle(),
+                                              child: Text(
+                                                'ยกเลิก',
+                                                style: TextStyle(
+                                                    color: Colors.orange),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                            ),
+                                            TextButton(
+                                              style: ButtonStyle(),
+                                              child: Text(
+                                                'ยืนยัน',
+                                                style: TextStyle(
+                                                    color: Colors.orange),
+                                              ),
+                                              onPressed: () {
+                                                bloc.confirmOrder(context);
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ));
+
+              //      bloc.confirmOrder(context);
                     //null;
                   },
                   child: const Text('ยืนยัน'),
