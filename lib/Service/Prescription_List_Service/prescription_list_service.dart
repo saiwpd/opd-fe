@@ -6,8 +6,11 @@ import '../../Models/Prescription_List_model/Prescription_Model.dart';
 class PrescriptionListService{
 
   Future<List<Prescription>> getPrescriptionList() async{
+    var patientId = "1";
+    var url = "http://localhost:3000/prescriptions" + ([null, ""].contains(patientId) ? "" : "?patientId=" + patientId);
+
     var response = await http.get(
-      Uri.parse("http://localhost:3000/prescriptions"),
+      Uri.parse(url),
     );
     if (response.statusCode == 200){
       var result = prescriptionListModelFromJson(response.body);

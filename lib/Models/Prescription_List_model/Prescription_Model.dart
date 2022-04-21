@@ -21,7 +21,7 @@ class Prescription {
     String? id;
     DateTime? createdAt;
     DateTime? updatedAt;
-    Status? status;
+    String? status;
     String? patientId;
     String? doctorId;
 
@@ -29,7 +29,7 @@ class Prescription {
         id: json["_id"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
-        status: json["status"] == null ? null : statusValues.map[json["status"]],
+        status: json["status"] == null ? null : json["status"],
         patientId: json["patientId"] == null ? null : json["patientId"],
         doctorId: json["doctorId"] == null ? null : json["doctorId"],
     );//PrescriptionListModel
@@ -38,28 +38,8 @@ class Prescription {
         "_id": id,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
-        "status": status == null ? null : statusValues.reverse[status],
+        "status": status == null ? null : status,
         "patientId": patientId == null ? null : patientId,
         "doctorId": doctorId == null ? null : doctorId,
     };
-}
-
-enum Status { CREATED }
-
-final statusValues = EnumValues({
-    "CREATED": Status.CREATED
-});
-
-class EnumValues<T> {
-    Map<String, T> map = <String, T>{};
-    Map<T, String> reverseMap = <T, String>{};
-
-    EnumValues(this.map);
-
-    Map<T, String> get reverse {
-        if (reverseMap == null) {
-            reverseMap = map.map((k, v) => new MapEntry(v, k));
-        }
-        return reverseMap;
-    }
 }
