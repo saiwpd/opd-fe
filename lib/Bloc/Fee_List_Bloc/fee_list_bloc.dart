@@ -12,9 +12,11 @@ class FeeListBloc implements Bloc {
   List<FeeModel> feeList = [];
 
   Future<void> initPage() async {
-    await feeListService
-        .getFeeList()
-        .then((value) => {feeList = value, getDataController.sink.add(true)});
+    await feeListService.getFeeList().then((value) => {feeList = value});
+    feeList.forEach((x) {
+      x.createdAt = x.createdAt?.add(const Duration(hours: 7));
+      getDataController.sink.add(true);
+    });
   }
 
   @override

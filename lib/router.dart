@@ -4,6 +4,7 @@ import 'package:appname/Models/Medicine_Plan_Model/medicine_plan_model.dart' as 
 import 'package:appname/Models/Prescription_List_model/Prescription_Model.dart';
 import 'package:appname/Models/Prescription_Model/Prescription_Model.dart';
 import 'package:appname/Screen/menu/menu.dart';
+import 'package:appname/Screen/mock_bank/mock_bank.dart';
 import 'package:appname/Screen/payment/payment.dart';
 import 'package:appname/Screen/prescription_list/prescription_list.dart';
 import 'package:appname/routing_constants.dart';
@@ -14,6 +15,7 @@ import 'Screen/medicine_plan/medicine_plan.dart';
 import 'Screen/fee_invoice/fee_invoice.dart';
 import 'Screen/fee_list/fee_list.dart';
 import 'Screen/fee_receipt/fee_receipt.dart';
+import 'Screen/notification/notification.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -53,7 +55,19 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           builder: (context) => Payment(
                 data: settings.arguments as String,
               ));
+    // case notification:
+    //   return MaterialPageRoute(builder: (context) => NotificationList());
+    case notification:
+      return MaterialPageRoute(
+          builder: (context) => NotificationList(
+                data: settings.arguments as String,
+    ));
+    case mock_bank:
+      return MaterialPageRoute(
+          builder: (context) => MockBank(
+                data: settings.arguments as String,
+    ));
     default:
-      return MaterialPageRoute(builder: (context) => MedicineList());
+      return MaterialPageRoute(builder: (context) => Menu());
   }
 }

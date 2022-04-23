@@ -55,21 +55,19 @@ class MedicineOrderBloc implements Bloc {
     toDynamic = jsonDecode(jsondata);
     dataAfterEncode = DraftMedicinePlan.fromJson(toDynamic);
 
-
-medicinePlanModel.draftMedicinePlans!
-            .firstWhere((x) => x.id == dataAfterEncode.id)
-            .dosage = dataAfterEncode.dosage;
-            medicinePlanModel.draftMedicinePlans!
-            .firstWhere((x) => x.id == dataAfterEncode.id)
-            .remark = dataAfterEncode.remark;
-            medicinePlanModel.draftMedicinePlans!
-            .firstWhere((x) => x.id == dataAfterEncode.id).dosageMeals = dataAfterEncode.dosageMeals;
-            medicinePlanModel.draftMedicinePlans!
-            .firstWhere((x) => x.id == dataAfterEncode.id).dosageTimes = dataAfterEncode.dosageTimes;
-getDataController.sink.add(true);
-
-
-
+    medicinePlanModel.draftMedicinePlans!
+        .firstWhere((x) => x.id == dataAfterEncode.id)
+        .dosage = dataAfterEncode.dosage;
+    medicinePlanModel.draftMedicinePlans!
+        .firstWhere((x) => x.id == dataAfterEncode.id)
+        .remark = dataAfterEncode.remark;
+    medicinePlanModel.draftMedicinePlans!
+        .firstWhere((x) => x.id == dataAfterEncode.id)
+        .dosageMeals = dataAfterEncode.dosageMeals;
+    medicinePlanModel.draftMedicinePlans!
+        .firstWhere((x) => x.id == dataAfterEncode.id)
+        .dosageTimes = dataAfterEncode.dosageTimes;
+    getDataController.sink.add(true);
   }
 
   @override

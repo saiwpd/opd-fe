@@ -16,11 +16,19 @@ class PaymentBloc implements Bloc {
     getDataController.sink.add(true);
   }
 
-  void confirmPayment(BuildContext context) async {
-    var result = await paymentService.payments(paymentModel); 
+  void createPayment(BuildContext context, String refId) async {
+    var result = await paymentService.CreatePayment(paymentModel); 
     if (result != null) 
     {
-      Navigator.pushNamed(context, fee_list);
+      Navigator.pushNamed(context, mock_bank, arguments: refId);
+    }
+  }
+
+  void confirmPayment(BuildContext context) async {
+    var result = await paymentService.Payments(paymentModel); 
+    if (result != null) 
+    {
+      Navigator.pushNamed(context, homeRoute);
     }
   }
 

@@ -46,6 +46,17 @@ class _MedicinePlanState extends State<MedicinePlan> {
               onPressed: () {
                 Navigator.pop(context, widget.data);
               }),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.notifications,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, notification, arguments: "2");
+              },
+            )
+          ],
           centerTitle: true,
           title: Text(
             "Paracetamol",

@@ -12,12 +12,14 @@ class MedicinePlanBloc implements Bloc {
   MedicinePlanModel medicinePlanModel = MedicinePlanModel();
   DraftMedicinePlan draftMedicinePlan = DraftMedicinePlan();
   MedicinePlanService medicinePlanService = MedicinePlanService();
-  bool isMorning = false;
-  bool isAfternoon = false;
-  bool isEvening = false;
-  bool isNight = false;
-  bool isBeforeFood = false;
-  bool isAfterFood = false;
+  bool? isMorning = false;
+  bool? isAfternoon = false;
+  bool? isEvening = false;
+  bool? isNight = false;
+  bool? isBeforeFood = false;
+  bool? isAfterFood = false;
+
+  // List<String> dosageSplit;
 
   TextEditingController dosage = TextEditingController();
   TextEditingController scale = TextEditingController();
@@ -27,9 +29,22 @@ class MedicinePlanBloc implements Bloc {
   Future<void> initPage(DraftMedicinePlan data) async {
     medicinePlanModel.draftMedicinePlans = [];
     medicinePlanModel.draftMedicinePlans?.add(data);
-    medicinePlanModel.draftMedicinePlans?[0].dosageMeals?.clear();
 
-    medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.clear();
+    String? dosageString = medicinePlanModel.draftMedicinePlans?[0].dosage.toString();
+
+    dosage.text = dosageString!;
+
+    if(medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.length != 0){
+      isMorning = medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.contains("เช้า");
+      isAfternoon = medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.contains("กลางวัน");
+      isEvening = medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.contains("เย็น");
+      isNight = medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.contains("ก่อนนอน");
+
+    }
+    if(medicinePlanModel.draftMedicinePlans?[0].dosageMeals?.length != 0){
+      isBeforeFood = medicinePlanModel.draftMedicinePlans?[0].dosageMeals?.contains("หลังอาหาร");
+      isAfterFood = medicinePlanModel.draftMedicinePlans?[0].dosageMeals?.contains("ก่อนอาหาร");
+    }
     getDataController.sink.add(true);
   }
 
@@ -37,22 +52,22 @@ class MedicinePlanBloc implements Bloc {
     medicinePlanModel.draftMedicinePlans?[0].dosage = int.parse(dosage.text);
     medicinePlanModel.draftMedicinePlans?[0].remark = note.text;
 
-    if (isMorning) {
+    if (isMorning!) {
       medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.add("เช้า");
     }
-    if (isAfternoon) {
+    if (isAfternoon!) {
       medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.add("กลางวัน");
     }
-    if (isEvening) {
+    if (isEvening!) {
       medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.add("เย็น");
     }
-    if (isNight) {
+    if (isNight!) {
       medicinePlanModel.draftMedicinePlans?[0].dosageTimes?.add("ก่อนนอน");
     }
-    if (isAfterFood) {
+    if (isAfterFood!) {
       medicinePlanModel.draftMedicinePlans?[0].dosageMeals?.add("หลังอาหาร");
     }
-    if (isBeforeFood) {
+    if (isBeforeFood!) {
       medicinePlanModel.draftMedicinePlans?[0].dosageMeals?.add("ก่อนอาหาร");
     }
 
