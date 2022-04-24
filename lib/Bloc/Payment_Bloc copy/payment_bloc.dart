@@ -17,18 +17,16 @@ class PaymentBloc implements Bloc {
   }
 
   void createPayment(BuildContext context, String refId) async {
-    var result = await paymentService.CreatePayment(paymentModel); 
-    if (result != null) 
-    {
+    var result = await paymentService.CreatePayment(paymentModel);
+    if (result != null) {
       Navigator.pushNamed(context, mock_bank, arguments: refId);
     }
   }
 
   void confirmPayment(BuildContext context) async {
-    var result = await paymentService.Payments(paymentModel); 
-    if (result != null) 
-    {
-      Navigator.pushNamed(context, homeRoute);
+    var result = await paymentService.Payments(paymentModel);
+    if (result != null) {
+      Navigator.pushNamedAndRemoveUntil(context, homeRoute, (r) => false);
     }
   }
 
