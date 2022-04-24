@@ -413,9 +413,7 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                         textStyle:
                                             const TextStyle(fontSize: 16)),
                                     onPressed: () {
-                                      //Edittttt;
-                                      null;
-                                      //Navigator.pop(context, medicine_list);
+                                      Navigator.pushNamedAndRemoveUntil(context, homeRoute, (r) => false);
                                     },
                                     child: const Text('ยืนยัน'),
                                   ),

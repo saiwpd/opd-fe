@@ -36,7 +36,7 @@ class _FeeListState extends State<FeeList> {
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pop(context, homeRoute);
             }),
         actions: <Widget>[
           IconButton(
