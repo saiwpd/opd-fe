@@ -5,12 +5,8 @@ import 'package:appname/Models/Medicine_Plan_Model/medicine_plan_model.dart'
 import 'package:appname/Models/Prescription_List_model/Prescription_Model.dart';
 import 'package:appname/Models/Prescription_Model/Prescription_Model.dart';
 import 'package:appname/Screen/menu/menu.dart';
-<<<<<<< HEAD
 import 'package:appname/Screen/sign_in/sign_in.dart';
 import 'package:appname/Screen/otp_form/otp_form.dart';
-=======
-import 'package:appname/Screen/mock_bank/mock_bank.dart';
->>>>>>> 21d210e6773dd9a4cf0d6724c08e34fefa356d7e
 import 'package:appname/Screen/payment/payment.dart';
 import 'package:appname/Screen/prescription_list/prescription_list.dart';
 import 'package:appname/routing_constants.dart';
@@ -22,7 +18,6 @@ import 'Screen/medicine_plan/medicine_plan.dart';
 import 'Screen/fee_invoice/fee_invoice.dart';
 import 'Screen/fee_list/fee_list.dart';
 import 'Screen/fee_receipt/fee_receipt.dart';
-<<<<<<< HEAD
 import 'Screen/otp_form/otp_form.dart';
 import 'Screen/menu/menu.dart';
 =======
