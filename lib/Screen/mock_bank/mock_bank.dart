@@ -1,3 +1,4 @@
+import 'package:appname/Models/Payment_Model/payment_model.dart';
 import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,7 +7,7 @@ import '../../Bloc/Payment_Bloc copy/payment_bloc.dart';
 import '../../SharedWidget/app_loading.dart';
 
 class MockBank extends StatefulWidget {
-  String data;
+  PaymentModel data;
   //Payment({Key? key}) : super(key: key);
   MockBank({Key? key, required this.data}) : super(key: key);
 
@@ -19,8 +20,8 @@ class _MockBankState extends State<MockBank> {
 
   void initState() {
     super.initState();
-    bloc.initPage();
-    bloc.paymentModel.refId = widget.data.toString();
+    bloc.initPageMockBank(widget.data);
+    //bloc.paymentModel.refId = widget.data.toString();
   }
 
   @override

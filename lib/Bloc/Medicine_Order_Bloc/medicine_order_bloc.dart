@@ -36,6 +36,8 @@ class MedicineOrderBloc implements Bloc {
   }
 
   void confirmOrder(BuildContext context) async {
+    medicinePlanModel.patientId = "1";
+    medicinePlanModel.doctorId = "2";
     await medicineOrderservice
         .confirmMedicineOrder(medicinePlanModel)
         .then((value) => {

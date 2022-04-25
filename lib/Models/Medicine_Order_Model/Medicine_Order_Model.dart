@@ -11,16 +11,24 @@ String medicineOrderModelToJson(MedicineOrderModel data) => json.encode(data.toJ
 class MedicineOrderModel {
     MedicineOrderModel({
         this.draftMedicinePlans,
+        this.patientId,
+        this.doctorId,
     });
 
     List<DraftMedicinePlan>? draftMedicinePlans;
+    String? patientId;
+    String? doctorId;
 
     factory MedicineOrderModel.fromJson(Map<String, dynamic> json) => MedicineOrderModel(
         draftMedicinePlans: List<DraftMedicinePlan>.from(json["draftMedicinePlans"].map((x) => DraftMedicinePlan.fromJson(x))),
+        patientId: json["patientId"],
+        doctorId: json["doctorId"],
     );
 
     Map<String, dynamic> toJson() => {
         "draftMedicinePlans": List<dynamic>.from(draftMedicinePlans!.map((x) => x.toJson())),
+        "patientId": patientId,
+        "doctorId": doctorId,
     };
 }
 

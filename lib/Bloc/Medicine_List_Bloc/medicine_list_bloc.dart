@@ -80,6 +80,9 @@ class MedicineListBloc implements Bloc {
   }
 
   void createOrder(BuildContext context) async {
+    medicineOrderModel.patientId = "1";
+    medicineOrderModel.doctorId = "2";
+
     medicineOrderModel.draftMedicinePlans!.forEach((x) {
       //x.id = null;
       x.dosage = 0;

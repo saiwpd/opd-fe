@@ -9,6 +9,7 @@ import 'package:appname/Screen/payment/payment.dart';
 import 'package:appname/Screen/prescription_list/prescription_list.dart';
 import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
+import 'Models/Payment_Model/payment_model.dart';
 import 'Screen/medicine_list/medicine_list.dart';
 import 'Screen/medicine_order/medicine_order.dart';
 import 'Screen/medicine_plan/medicine_plan.dart';
@@ -65,7 +66,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case mock_bank:
       return MaterialPageRoute(
           builder: (context) => MockBank(
-                data: settings.arguments as String,
+                data: settings.arguments as PaymentModel,
     ));
     default:
       return MaterialPageRoute(builder: (context) => Menu());

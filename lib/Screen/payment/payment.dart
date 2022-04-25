@@ -144,7 +144,7 @@ class _PaymentState extends State<Payment> {
               textStyle: const TextStyle(fontSize: 20)),
           onPressed: () {
             //Navigator.pushNamed(context, mock_bank, arguments: widget.data);
-            bloc.createPayment(context, widget.data);
+            bloc.createPayment(context);
           },
           child: const Text('ยืนยัน'),
         ),

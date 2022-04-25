@@ -278,13 +278,15 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                                   .size
                                                   .width *
                                               1,
-                                          child: Text(
+                                           child: Text(
                                             'ช่วง : ' +
-                                                widget
+                                                (widget
                                                     .data
                                                     .draftMedicinePlans![index]
-                                                    .dosageTimes
-                                                    .toString(),
+                                                    .dosageTimes?.length != 0 ? widget
+                                                    .data
+                                                    .draftMedicinePlans![index]
+                                                    .dosageTimes.toString().replaceAll("[", "").replaceAll("]", "") : "-"),
                                             textAlign: TextAlign.left,
                                           )),
                                       Container(
@@ -295,11 +297,13 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                               1,
                                           child: Text(
                                             'มื้อ : ' +
-                                                widget
+                                                (widget
                                                     .data
                                                     .draftMedicinePlans![index]
-                                                    .dosageMeals
-                                                    .toString(),
+                                                    .dosageMeals?.length != 0 ? widget
+                                                    .data
+                                                    .draftMedicinePlans![index]
+                                                    .dosageMeals.toString().replaceAll("[", "").replaceAll("]", "") : "-"),
                                             textAlign: TextAlign.left,
                                           )),
                                       // Container(
