@@ -1,6 +1,7 @@
 import 'package:appname/Bloc/Fee_List_Bloc/fee_list_bloc.dart';
 import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../Models/Fee_List_Model/Fee_Model.dart';
 import '../../Service/Fee_List_Service/fee_list_service.dart';
@@ -30,13 +31,24 @@ class _FeeListState extends State<FeeList> {
         automaticallyImplyLeading: true,
         centerTitle: true,
         leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(context, homeRoute, (r) => false);
+            }),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.notifications,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, notification, arguments: "1");
+            },
+          )
+        ],
         title: Text(
           "รายการใบสรุปค่าบริการ",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
@@ -80,8 +92,9 @@ class _FeeListState extends State<FeeList> {
                                         children: [
                                           Text(
                                               '${bloc.feeList[index].status == "PAID" ? bloc.feeList[index].refId : bloc.feeList[index].refId}'),
-                                          Text(
-                                              '${bloc.feeList[index].createdAt.toString()}'),
+                                          Text(DateFormat('dd-MMM-yyyy – HH:mm')
+                                              .format(bloc
+                                                  .feeList[index].createdAt!)),
                                           Text(
                                               'ค่าบริการ ${bloc.feeList[index].price} บาท'),
                                         ],

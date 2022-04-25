@@ -5,20 +5,29 @@ import 'package:appname/Models/Medicine_Plan_Model/medicine_plan_model.dart'
 import 'package:appname/Models/Prescription_List_model/Prescription_Model.dart';
 import 'package:appname/Models/Prescription_Model/Prescription_Model.dart';
 import 'package:appname/Screen/menu/menu.dart';
+<<<<<<< HEAD
 import 'package:appname/Screen/sign_in/sign_in.dart';
 import 'package:appname/Screen/otp_form/otp_form.dart';
+=======
+import 'package:appname/Screen/mock_bank/mock_bank.dart';
+>>>>>>> 21d210e6773dd9a4cf0d6724c08e34fefa356d7e
 import 'package:appname/Screen/payment/payment.dart';
 import 'package:appname/Screen/prescription_list/prescription_list.dart';
 import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
+import 'Models/Payment_Model/payment_model.dart';
 import 'Screen/medicine_list/medicine_list.dart';
 import 'Screen/medicine_order/medicine_order.dart';
 import 'Screen/medicine_plan/medicine_plan.dart';
 import 'Screen/fee_invoice/fee_invoice.dart';
 import 'Screen/fee_list/fee_list.dart';
 import 'Screen/fee_receipt/fee_receipt.dart';
+<<<<<<< HEAD
 import 'Screen/otp_form/otp_form.dart';
 import 'Screen/menu/menu.dart';
+=======
+import 'Screen/notification/notification.dart';
+>>>>>>> 21d210e6773dd9a4cf0d6724c08e34fefa356d7e
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -58,6 +67,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           builder: (context) => Payment(
                 data: settings.arguments as String,
               ));
+<<<<<<< HEAD
     case otp_form:
       return MaterialPageRoute(
           builder: (context) => Otp_form(
@@ -68,7 +78,21 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           builder: (context) => Menu(
               //data: settings.arguments,
               ));
+=======
+    // case notification:
+    //   return MaterialPageRoute(builder: (context) => NotificationList());
+    case notification:
+      return MaterialPageRoute(
+          builder: (context) => NotificationList(
+                data: settings.arguments as String,
+    ));
+    case mock_bank:
+      return MaterialPageRoute(
+          builder: (context) => MockBank(
+                data: settings.arguments as PaymentModel,
+    ));
+>>>>>>> 21d210e6773dd9a4cf0d6724c08e34fefa356d7e
     default:
-      return MaterialPageRoute(builder: (context) => MedicineList());
+      return MaterialPageRoute(builder: (context) => Menu());
   }
 }

@@ -1,3 +1,4 @@
+import 'package:appname/Bloc/Notification_Bloc/notification_bloc.dart';
 import 'package:appname/Models/Medicine_List_Model/Medicine_Model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,17 @@ class _MedicineListState extends State<MedicineList> {
             onPressed: () {
               Navigator.pop(context);
             }),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.notifications,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, notification, arguments: "2");
+            },
+          )
+        ],
         title: Text(
           "รายการยาทั้งหมด",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),

@@ -40,6 +40,17 @@ class _MedicineOrderState extends State<MedicineOrder> {
             onPressed: () {
               Navigator.pop(context);
             }),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.notifications,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, notification, arguments: "2");
+            },
+          )
+        ],
         centerTitle: true,
         title: Text(
           "รายการยาที่สั่ง",
@@ -125,7 +136,8 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                       Expanded(
                                         flex: 2,
                                         child: Container(
-                                          child: Image.asset('assets/images/medicine.png'),
+                                          child: Image.asset(
+                                              'assets/images/medicine.png'),
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             border: Border.all(
@@ -266,13 +278,15 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                                   .size
                                                   .width *
                                               1,
-                                          child: Text(
+                                           child: Text(
                                             'ช่วง : ' +
-                                                widget
+                                                (widget
                                                     .data
                                                     .draftMedicinePlans![index]
-                                                    .dosageTimes
-                                                    .toString(),
+                                                    .dosageTimes?.length != 0 ? widget
+                                                    .data
+                                                    .draftMedicinePlans![index]
+                                                    .dosageTimes.toString().replaceAll("[", "").replaceAll("]", "") : "-"),
                                             textAlign: TextAlign.left,
                                           )),
                                       Container(
@@ -283,11 +297,13 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                               1,
                                           child: Text(
                                             'มื้อ : ' +
-                                                widget
+                                                (widget
                                                     .data
                                                     .draftMedicinePlans![index]
-                                                    .dosageMeals
-                                                    .toString(),
+                                                    .dosageMeals?.length != 0 ? widget
+                                                    .data
+                                                    .draftMedicinePlans![index]
+                                                    .dosageMeals.toString().replaceAll("[", "").replaceAll("]", "") : "-"),
                                             textAlign: TextAlign.left,
                                           )),
                                       // Container(
@@ -315,7 +331,7 @@ class _MedicineOrderState extends State<MedicineOrder> {
                                           onPressed: () {
                                             Navigator.pushNamed(
                                                     context, medicine_plan,
-                                                    arguments: widget.data
+                                                    arguments: bloc.medicinePlanModel
                                                             .draftMedicinePlans![
                                                         index])
                                                 .then((value) =>
@@ -359,8 +375,55 @@ class _MedicineOrderState extends State<MedicineOrder> {
                       fixedSize: const Size(100, 50),
                       textStyle: const TextStyle(fontSize: 20)),
                   onPressed: () {
-                    //bloc.confirmOrder(context);
-                    null;
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => Container(
+                              child: AlertDialog(
+                                backgroundColor: Color(0xffE8DEF8),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(20.0))),
+                                title: Center(
+                                  child: Text(
+                                    'คุณต้องการยกเลิกการสั่งยา?',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w100),
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50)),
+                                        primary: Color(0xFFB65F5F),
+                                        fixedSize: const Size(80, 30),
+                                        textStyle:
+                                            const TextStyle(fontSize: 16)),
+                                    onPressed: () {
+                                      Navigator.pop(context, false);
+                                    },
+                                    child: const Text('ยกเลิก'),
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50)),
+                                        primary: Colors.green,
+                                        fixedSize: const Size(80, 30),
+                                        textStyle:
+                                            const TextStyle(fontSize: 16)),
+                                    onPressed: () {
+                                      Navigator.pushNamedAndRemoveUntil(context, homeRoute, (r) => false);
+                                    },
+                                    child: const Text('ยืนยัน'),
+                                  ),
+                                ],
+                              ),
+                            ));
                   },
                   child: const Text('ยกเลิก'),
                 ),
@@ -375,65 +438,62 @@ class _MedicineOrderState extends State<MedicineOrder> {
                       fixedSize: const Size(100, 50),
                       textStyle: const TextStyle(fontSize: 20)),
                   onPressed: () {
-showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) => Container(
-                                        child: AlertDialog(
-                                          title: Center(
-                                            child: Text(
-                                              'เมื่อยืนยันการสั่งยาแล้ว\nระบบจะส่งการแจ้งเตือนหาเภสัชกร',
-                                              
-                                              style: TextStyle(
-                                                  color: Colors.orange,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w100),
-                                            ),
-                                          ),
-                                          content: Text(
-                                              'คุณต้องการยืนยันการสั่งยา',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  color: Colors.orange,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w100),
-                                            ),
-                                        
-                                          actions: <Widget>[
-                                            TextButton(
-                                              style: ButtonStyle(),
-                                              child: Text(
-                                                'ยกเลิก',
-                                                style: TextStyle(
-                                                    color: Colors.orange),
-                                              ),
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                            ),
-                                            TextButton(
-                                              style: ButtonStyle(),
-                                              child: Text(
-                                                'ยืนยัน',
-                                                style: TextStyle(
-                                                    color: Colors.orange),
-                                              ),
-                                              onPressed: () {
-                                                bloc.confirmOrder(context);
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      ));
-
-              //      bloc.confirmOrder(context);
-                    //null;
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => Container(
+                              child: AlertDialog(
+                                backgroundColor: Color(0xffE8DEF8),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(20.0))),
+                                title: Center(
+                                  child: Text(
+                                    'เมื่อยืนยันการสั่งยาแล้ว\nระบบจะส่งการแจ้งเตือนหาเภสัชกร\n\nคุณต้องการยืนยันการสั่งยา?',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w100),
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50)),
+                                        primary: Color(0xFFB65F5F),
+                                        fixedSize: const Size(80, 30),
+                                        textStyle:
+                                            const TextStyle(fontSize: 16)),
+                                    onPressed: () {
+                                      Navigator.pop(context, false);
+                                    },
+                                    child: const Text('ยกเลิก'),
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50)),
+                                        primary: Colors.green,
+                                        fixedSize: const Size(80, 30),
+                                        textStyle:
+                                            const TextStyle(fontSize: 16)),
+                                    onPressed: () {
+                                      bloc.confirmOrder(context);
+                                    },
+                                    child: const Text('ยืนยัน'),
+                                  ),
+                                ],
+                              ),
+                            ));
                   },
                   child: const Text('ยืนยัน'),
                 ),
               ],
             ))),
         Container(
-          height: 10,
+          height: 20,
         ),
       ]),
     );

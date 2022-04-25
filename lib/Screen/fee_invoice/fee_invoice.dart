@@ -27,6 +27,17 @@ class _FeeInvoiceState extends State<FeeInvoice> {
             onPressed: () {
               Navigator.pop(context);
             }),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.notifications,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, notification, arguments: "1");
+            },
+          )
+        ],
         backgroundColor: Colors.white,
         automaticallyImplyLeading: true,
         centerTitle: true,

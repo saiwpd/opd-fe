@@ -12,15 +12,25 @@ class PaymentBloc implements Bloc {
   PaymentModel paymentModel = new PaymentModel();
 
   Future<void> initPage() async {
-    paymentModel;
     getDataController.sink.add(true);
   }
 
+  Future<void> initPageMockBank(PaymentModel data) async {
+    paymentModel = data;
+    getDataController.sink.add(true);
+  }
+
+  void createPayment(BuildContext context) async {
+    var result = await paymentService.CreatePayment(paymentModel);
+    if (result != null) {
+      Navigator.pushNamed(context, mock_bank, arguments: paymentModel);
+    }
+  }
+
   void confirmPayment(BuildContext context) async {
-    var result = await paymentService.payments(paymentModel); 
-    if (result != null) 
-    {
-      Navigator.pushNamed(context, fee_list);
+    var result = await paymentService.Payments(paymentModel);
+    if (result != null) {
+      Navigator.pushNamedAndRemoveUntil(context, homeRoute, (r) => false);
     }
   }
 
