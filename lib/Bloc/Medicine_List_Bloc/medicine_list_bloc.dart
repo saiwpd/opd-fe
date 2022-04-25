@@ -3,8 +3,10 @@ import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../Models/Medicine_List_Model/Medicine_Model.dart';
-import '../../Models/Medicine_Order_Model/Medicine_Order_Model.dart' as order_model;
-import '../../Models/Medicine_Plan_Model/medicine_plan_model.dart' as plan_model;
+import '../../Models/Medicine_Order_Model/Medicine_Order_Model.dart'
+    as order_model;
+import '../../Models/Medicine_Plan_Model/medicine_plan_model.dart'
+    as plan_model;
 import '../../Service/Medicine_List_Service/medicine_list_service.dart';
 import '../../Service/Medicine_Order_Service/medicine_order_service.dart';
 import '../bloc.dart';
@@ -13,8 +15,10 @@ class MedicineListBloc implements Bloc {
   StreamController<bool> getDataController = StreamController<bool>();
   MedicineListService medicineListservice = MedicineListService();
   List<Medicine> listOfMedicine = [];
-  order_model.MedicineOrderModel medicineOrderModel = order_model.MedicineOrderModel();
-  plan_model.MedicinePlanModel medicinePlanModel = plan_model.MedicinePlanModel();
+  order_model.MedicineOrderModel medicineOrderModel =
+      order_model.MedicineOrderModel();
+  plan_model.MedicinePlanModel medicinePlanModel =
+      plan_model.MedicinePlanModel();
   MedicineOrderService medicineOrderservice = MedicineOrderService();
 
   Future<void> initPage() async {
@@ -91,17 +95,10 @@ class MedicineListBloc implements Bloc {
       }
     });
 
-    var result = await medicineListservice.addMedicineOrder(medicineOrderModel); 
-    if (result != null) 
-    {
-      Navigator.pushNamed(context, medicine_order,arguments: result);
+    var result = await medicineListservice.addMedicineOrder(medicineOrderModel);
+    if (result != null) {
+      Navigator.pushNamed(context, medicine_order, arguments: result);
     }
-
-
-    // await medicineListservice.addMedicineOrder(medicineOrder).then((value) => {
-    //       if (value) {Navigator.pushNamed(context, medicine_order,
-    //               arguments: medicineOrder)}
-    //     });
   }
 
   @override
