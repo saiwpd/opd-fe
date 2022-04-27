@@ -11,6 +11,7 @@ class SignInBloc implements Bloc {
   StreamController<bool> getDataController = StreamController<bool>();
   sign_in.SignIn signInModel = sign_in.SignIn();
   SignInService signInservice = SignInService();
+  sign_in.OtpExp otpExpModel = sign_in.OtpExp();
 
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -24,19 +25,15 @@ class SignInBloc implements Bloc {
     signInModel.username = username.text;
     signInModel.password = password.text;
     var result = await signInservice.signIn(signInModel);
-    if (result != null) {
-      Navigator.pushNamed(context, otp_form, arguments: signInModel);
+    if (result.id != null) {
+      Navigator.pushNamed(context, otp_form, arguments: result.id);
+    } 
+    else {
+      otpExpModel.errormessege = result.errormessege;
     }
+    getDataController.sink.add(true);
   }
 
-  // void otp(BuildContext context) async {
-  //   var result = await signInservice.signIn(signInModel);
-  //   if (result != null) {
-  //     Navigator.pushNamed(context, otp_form);
-  //   } else {
-  //     Navigator.pushNamed(context, fee_list);
-  //   }
-  // }
 
   @override
   void dispose() {

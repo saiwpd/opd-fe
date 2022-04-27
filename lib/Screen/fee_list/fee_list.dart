@@ -36,7 +36,7 @@ class _FeeListState extends State<FeeList> {
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(context, homeRoute, (r) => false);
+              Navigator.pushNamedAndRemoveUntil(context, menu, (r) => false);
             }),
         actions: <Widget>[
           IconButton(

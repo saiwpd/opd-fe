@@ -19,90 +19,120 @@ class _Sign_inState extends State<Sign_in> {
   late TextEditingController controller;
 
   @override
+  void initState() {
+    super.initState();
+    bloc.initPage();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 1,
-          backgroundColor: Colors.white,
-          automaticallyImplyLeading: true,
-          centerTitle: true,
-          title: Text(
-            "Sign in",
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
-          ),
+      appBar: AppBar(
+        elevation: 1,
+        backgroundColor: Colors.white,
+        automaticallyImplyLeading: true,
+        centerTitle: true,
+        title: Text(
+          "Log in",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
         ),
-        body: SingleChildScrollView(
-            child: Column(children: [
-          Container(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextFormField(
-              controller: bloc.username,
-              decoration: InputDecoration(
-                  icon: Icon(
-                    Icons.email,
-                    color: Colors.blue,
+      ),
+      body: StreamBuilder(
+          stream: bloc.getDataController.stream,
+          builder: (context, AsyncSnapshot<bool> snapshot) {
+            if (snapshot.hasData) {
+              if (!snapshot.hasError) {
+                return SingleChildScrollView(
+                    child: Column(children: [
+                  Container(
+                    height: 20,
                   ),
-                  hintText: 'Enter Username',
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.blue)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.blue)),
-                  errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.red)),
-                  focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.red))),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextFormField(
-              controller: bloc.password,
-              obscureText: true,
-              decoration: InputDecoration(
-                  icon: Icon(
-                    Icons.vpn_key,
-                    color: Colors.blue,
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextFormField(
+                      controller: bloc.username,
+                      decoration: InputDecoration(
+                          icon: Icon(
+                            Icons.email,
+                            color: Colors.blue,
+                          ),
+                          hintText: 'Enter Username',
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide(color: Colors.blue)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide(color: Colors.blue)),
+                          errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide(color: Colors.red)),
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide(color: Colors.red))),
+                    ),
                   ),
-                  hintText: 'Enter Password',
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.blue)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.blue)),
-                  errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.red)),
-                  focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide(color: Colors.red))),
-            ),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                primary: Color(0xffE8DEF8),
-                onPrimary: Colors.black,
-                fixedSize: const Size(200, 80),
-                textStyle:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-            onPressed: () {
-              bloc.signIn(context);
-              // Navigator.pushNamed(context, otp_form);
-            },
-            child: const Text('Sign in'),
-          ),
-          Container(
-            height: 20,
-          ),
-        ])));
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextFormField(
+                      controller: bloc.password,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          icon: Icon(
+                            Icons.vpn_key,
+                            color: Colors.blue,
+                          ),
+                          hintText: 'Enter Password',
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide(color: Colors.blue)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide(color: Colors.blue)),
+                          errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide(color: Colors.red)),
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide(color: Colors.red))),
+                    ),
+                  ),
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(bloc.otpExpModel.errormessege == null? '' : '${bloc.otpExpModel.errormessege}', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),),                        
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        primary: Color(0xffE8DEF8),
+                        onPrimary: Colors.black,
+                        fixedSize: const Size(200, 80),
+                        textStyle: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w500)),
+                    onPressed: () {
+                      bloc.signIn(context);
+                      // Navigator.pushNamed(context, otp_form);
+                    },
+                    child: const Text('Log in'),
+                  ),
+                  Container(
+                    height: 20,
+                  ),
+                ]));
+              } else {
+                return AppLoaderIndicator();
+              }
+            } else {
+              return AppLoaderIndicator();
+            }
+          }),
+    );
   }
 }

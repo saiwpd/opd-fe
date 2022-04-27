@@ -65,7 +65,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case otp_form:
       return MaterialPageRoute(
           builder: (context) => Otp_form(
-              //data: settings.arguments as OtpExp,
+              data: settings.arguments as String,
               ));
     case menu:
       return MaterialPageRoute(

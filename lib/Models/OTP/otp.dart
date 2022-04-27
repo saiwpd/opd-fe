@@ -36,6 +36,7 @@ class GetProfile {
     this.otp,
     this.otpExpireAt,
     this.updatedAt,
+    this.errormessege,
   });
 
   String? id;
@@ -45,6 +46,7 @@ class GetProfile {
   String? otp;
   DateTime? otpExpireAt;
   DateTime? updatedAt;
+  String? errormessege;
 
   factory GetProfile.fromJson(Map<String, dynamic> json) => GetProfile(
         id: json["_id"],
@@ -54,6 +56,7 @@ class GetProfile {
         otp: json["otp"],
         otpExpireAt: DateTime.parse(json["otpExpireAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
+        errormessege: json["errormessege"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -64,5 +67,6 @@ class GetProfile {
         "otp": otp,
         "otpExpireAt": otpExpireAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
+        "errormessege": errormessege,
       };
 }

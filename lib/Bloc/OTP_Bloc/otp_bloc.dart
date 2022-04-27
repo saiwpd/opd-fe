@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:appname/Models/OTP/otp.dart';
+import 'package:appname/Models/Sign_In/Sign_In.dart';
 import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
 
@@ -12,18 +13,23 @@ class OTPBloc implements Bloc {
   StreamController<bool> getDataController = StreamController<bool>();
   send_otp.SendOtp otpModel = send_otp.SendOtp();
   TextEditingController otpdata = TextEditingController();
-  Future<void> initPage() async {
-    otpModel;
+  GetProfile getProfileModel = new GetProfile();
+  
+  Future<void> initPage(String data) async {
+    otpModel.id = data;
     getDataController.sink.add(true);
   }
 
   void otp(BuildContext context) async {
-    otpModel.id = "62644007cc92696b95771667";
     otpModel.otp = otpdata.text;
     var result = await otpservice.sendOTP(otpModel);
-    if (result != null) {
+    if (result.id != null) {
       Navigator.pushNamed(context, menu);
     }
+    else{
+      getProfileModel.errormessege = result.errormessege;
+    }
+    getDataController.sink.add(true);
   }
 
   @override

@@ -15,7 +15,10 @@ class SignInService {
       var result = otpFromJson(response.body);
       return result;
     } else {
-      throw Exception('Failed');
+      OtpExp otpExp = new OtpExp();
+      otpExp.errormessege = "Username and password incorrect";
+      return otpExp;
+      //throw Exception('Failed');
     }
   }
 }

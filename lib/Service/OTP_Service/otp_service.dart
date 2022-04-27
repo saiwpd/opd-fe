@@ -15,7 +15,10 @@ class OTPService {
       var result = getProfileFromJson(response.body);
       return result;
     } else {
-      throw Exception('Failed');
+      GetProfile getProfileModel = new GetProfile();
+      getProfileModel.errormessege = "OTP is incorrected or expired";
+      return getProfileModel;
+      //throw Exception('Failed');
     }
   }
 }

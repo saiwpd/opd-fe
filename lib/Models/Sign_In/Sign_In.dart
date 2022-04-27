@@ -33,18 +33,22 @@ class OtpExp {
   OtpExp({
     this.otpExpireAt,
     this.id,
+    this.errormessege,
   });
 
   DateTime? otpExpireAt;
   String? id;
+  String? errormessege;
 
   factory OtpExp.fromJson(Map<String, dynamic> json) => OtpExp(
         otpExpireAt: DateTime.parse(json["otpExpireAt"]),
         id: json["_id"],
+        errormessege: json["errormessege"],
       );
 
   Map<String, dynamic> toJson() => {
         "otpExpireAt": otpExpireAt!.toIso8601String(),
         "_id": id,
+        "errormessege": errormessege,
       };
 }
