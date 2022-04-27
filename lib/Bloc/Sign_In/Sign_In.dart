@@ -25,7 +25,7 @@ class SignInBloc implements Bloc {
     signInModel.password = password.text;
     var result = await signInservice.signIn(signInModel);
     if (result != null) {
-      Navigator.pushNamed(context, otp_form);
+      Navigator.pushNamed(context, otp_form, arguments: signInModel);
     }
   }
 

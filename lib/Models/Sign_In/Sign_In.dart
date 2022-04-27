@@ -8,9 +8,9 @@ SignIn signInFromJson(String str) => SignIn.fromJson(json.decode(str));
 
 String signInToJson(SignIn data) => json.encode(data.toJson());
 
-Otp otpFromJson(String str) => Otp.fromJson(json.decode(str));
+OtpExp otpFromJson(String str) => OtpExp.fromJson(json.decode(str));
 
-String otpToJson(Otp data) => json.encode(data.toJson());
+String otpToJson(OtpExp data) => json.encode(data.toJson());
 
 class SignIn {
   SignIn({this.username, this.password});
@@ -29,8 +29,8 @@ class SignIn {
       };
 }
 
-class Otp {
-  Otp({
+class OtpExp {
+  OtpExp({
     this.otpExpireAt,
     this.id,
   });
@@ -38,7 +38,7 @@ class Otp {
   DateTime? otpExpireAt;
   String? id;
 
-  factory Otp.fromJson(Map<String, dynamic> json) => Otp(
+  factory OtpExp.fromJson(Map<String, dynamic> json) => OtpExp(
         otpExpireAt: DateTime.parse(json["otpExpireAt"]),
         id: json["_id"],
       );

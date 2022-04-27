@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../../Models/Sign_In/Sign_In.dart';
 
 class SignInService {
-  Future<Otp> signIn(SignIn senddata) async {
+  Future<OtpExp> signIn(SignIn senddata) async {
     var response =
         await http.post(Uri.parse("http://localhost:3000/profile/login"),
             headers: <String, String>{

@@ -2,14 +2,32 @@ import 'package:appname/routing_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:appname/Models/Sign_In/Sign_In.dart';
+import '../../Bloc/OTP_Bloc/otp_bloc.dart';
+import '../../Service/Sign_In/Sign_In.dart';
+import '../../SharedWidget/app_loading.dart';
+import '../../routing_constants.dart';
+
 class Otp_form extends StatefulWidget {
-  Otp_form({Key? key}) : super(key: key);
+  // OtpExp data;
+  Otp_form({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Otp_form> createState() => _Otp_formState();
 }
 
 class _Otp_formState extends State<Otp_form> {
+  OTPBloc bloc = OTPBloc();
+  late TextEditingController controller;
+
+  // void initState() {
+  //   super.initState();
+  //   bloc.initPageMockBank(widget.data);
+  //   //bloc.paymentModel.refId = widget.data.toString();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +49,7 @@ class _Otp_formState extends State<Otp_form> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextFormField(
+              controller: bloc.otpdata,
               obscureText: true,
               decoration: InputDecoration(
                   hintText: 'Enter OTP',
@@ -53,12 +72,12 @@ class _Otp_formState extends State<Otp_form> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 primary: Color(0xffE8DEF8),
-                onPrimary: Colors.black,
+                onPrimary: Color.fromRGBO(0, 0, 0, 1),
                 fixedSize: const Size(200, 80),
                 textStyle:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
             onPressed: () {
-              Navigator.pushNamed(context, menu);
+              bloc.otp(context);
             },
             child: const Text('confirm'),
           ),
