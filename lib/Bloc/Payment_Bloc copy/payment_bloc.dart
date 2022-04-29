@@ -30,7 +30,7 @@ class PaymentBloc implements Bloc {
   void confirmPayment(BuildContext context) async {
     var result = await paymentService.Payments(paymentModel);
     if (result != null) {
-      Navigator.pushNamedAndRemoveUntil(context, homeRoute, (r) => false);
+      Navigator.pushNamedAndRemoveUntil(context, menu, (r) => false);
     }
   }
 

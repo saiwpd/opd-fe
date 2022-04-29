@@ -41,7 +41,7 @@ class MedicineOrderBloc implements Bloc {
     await medicineOrderservice
         .confirmMedicineOrder(medicinePlanModel)
         .then((value) => {
-              if (value) {Navigator.pushNamed(context, fee_list)}
+              if (value) {Navigator.popAndPushNamed(context, menu)}
             });
   }
 
