@@ -129,8 +129,7 @@ class _MedicinePlanState extends State<MedicinePlan> {
                                 Text('ครั้งละ : '),
                                 TextField(
                                   keyboardType: TextInputType.number,
-                                  inputFormatters: <TextInputFormatter>[
-    FilteringTextInputFormatter.digitsOnly],
+                                
                                   controller: bloc.dosage,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
